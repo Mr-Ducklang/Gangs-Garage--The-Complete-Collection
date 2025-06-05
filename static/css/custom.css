@@ -1,0 +1,61 @@
+/* Custom styles for cards */
+.card {
+    transition: transform 0.1s ease-in-out;
+}
+
+.card-img-top {
+    border-radius: 5%;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.smallpadding {
+    padding: 5px;
+}
+
+.background {
+    background-color: #acacac;
+    border-radius: 5%;
+}
+
+
+.custom-bg:hover {
+    transform: scale(1.05); 
+    background-color: #551800;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
+/* Custom button style */
+.btn-custom {
+    background-color: #6c5ce7;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #ffffff;
+    color: white;
+}
+
+/* Custom background for specific sections */
+.custom-bg {
+    background-color: #372013;
+    padding: 11px;
+    border-radius: 0px;
+}
+
+.card {
+    border-radius: 5%;
+}
+
+.cardtext {
+    color: white;
+    text-align: center;
+}
+
+.card-text {
+    color: black;
+}
