@@ -1,3 +1,20 @@
+/* General Stuff */
+.center {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+
+}
+
+.solidborder {
+    border-style: solid; 
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.blueborder {
+    border-color: blue;
+}
 /* Custom styles for cards */
 .card {
     transition: transform 0.1s ease-in-out;
