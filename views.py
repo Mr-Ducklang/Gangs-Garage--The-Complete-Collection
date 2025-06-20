@@ -8,13 +8,21 @@ def init_routes(app):
         return render_template('menu.html')
 
     @app.route('/database', methods=['GET'])
-    def database():
+    def view_databases():
         if request.args.get('name') is not None:
             name = request.args.get('name')
             databases = Database.query.filter(Database.name.ilike(f'%{name}%')).all()
         else:
             databases = Database.query.all()
-        return render_template('menu.html', databases=databases)
+        return render_template('database.html', databases=databases)
+    
+    @app.route('/signin', methods=['GET'])
+    def signin():
+        return render_template('signin.html')
+    
+    @app.route('/quiz', methods=['GET'])
+    def quiz():
+        return render_template('quiz.html')
     
     @app.route('/index', methods=['GET'])
     def index():

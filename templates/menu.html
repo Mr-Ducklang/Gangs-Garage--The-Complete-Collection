@@ -4,9 +4,22 @@
     <div class="center blueborder solidborder">
         <h2 class="">Gang's Garage: The Complete Collection</h2>
         <div>
-            <h3 class="btn-primary btn">Sign Up/Log in</h3>
-            <h3 class="btn-primary btn">Databases</h3>
-            <h3 class="btn-primary btn">Quiz</h3>
+            <a 
+            class="btn-primary btn" 
+            href="{{url_for('signin')}}" 
+            role="button">Sign Up/Log in</a>
+            <a 
+            class="btn-primary btn" 
+            href="{{url_for('view_databases')}}" 
+            role="button">Databases</a>
+            <a 
+            class="btn-primary btn" 
+            href="{{url_for('quiz')}}" 
+            role="button">Quiz</a>
+            <a 
+            class="btn-primary btn" 
+            href="{{url_for('index')}}" 
+            role="button">index</a>
         </div>
     </div>
 </body>
