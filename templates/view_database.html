@@ -1,0 +1,156 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
+<body>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+  <!-- Modal -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Add New Vehicle
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="/add" method="POST">
+            <!--Image-->
+            <div class="mb-3">
+              <label for="image" class="form-label">Image URL</label>
+              <textarea class="form-control" id="vehicle-img" name="Image"></textarea>
+              
+            </div>
+            <!--Name-->
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Name<br>e.g: Jeremy, The Whip, Betsy</label>
+              <input type="text" class="form-control" id="vehicle-name" name='Name'/>
+            </div>
+            <!--Quote-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Quote<br>e.g: Good vehicle, does this and that</label>
+              <textarea class="form-control" id="vehicle-quote" name="Quote"></textarea>
+            </div>
+            <!--Description-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label"></label>Description</label>
+              <textarea class="form-control" id="vehicle-description" name="Description"></textarea>
+            </div>
+            <!--Odometer-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label"></label>Odometer</label>
+              <textarea class="form-control" id="vehicle-odometer" name="Odometer"></textarea>
+            </div>
+            <!--Owner-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Owner</label>
+              <textarea class="form-control" id="vehicle-owner" name="Owner"></textarea>
+            </div>
+            <!--Type-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Type<br>e.g: Ute, Sedan, Station Whip, Motorbike</label>
+              <textarea class="form-control" id="vehicle-type" name="Type"></textarea>
+            </div>
+            <!--Make-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Make<br>e.g: Mazda, Toyota, Honda, Yamaha</label>
+              <textarea class="form-control" id="vehicle-make" name="Make"></textarea>
+            </div>
+            <!--Model-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Model<br>e.g: Bravo, Yaris, Civic</label>
+              <textarea class="form-control" id="vehicle-model" name="Model"></textarea>
+            </div>
+            <!--Year-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Year<br>e.g: 2001, 2011</label>
+              <textarea class="form-control" id="vehicle-year" name="Year"></textarea>
+            </div>
+            <!--Features-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label"></label>Features</label>
+              <textarea class="form-control" id="vehicle-description" name="Features"></textarea>
+            </div>
+            <!--Issues-->
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Previous Issues</label>
+              <textarea class="form-control" id="previous-issues" name="PreviousIssues"></textarea>
+            </div>
+            <div class="mb-3"></div>
+              <label for="message-text" class="col-form-label">Current Issues</label>
+              <textarea class="form-control" id="current-issues" name="CurrentIssues"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Vehicle</button>
+            <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--Grid Layout-->
+  <div class="container">
+    <div class="row">
+      {% for vehicle in vehicles %}
+      <div class="col-12 col-md-6 col-lg-4 justify-content-center">
+        <div class="card mb-4 custom-bg">
+          <img
+            src="{{vehicle.image}}"
+            class="card-img-top"
+            alt="Picture of {{vehicle.name}}"
+            width="300"
+            height="225"
+          />
+          <div class="card-body">
+            <h5 class="card-title cardtext">{{vehicle.name}}</h5>
+            <p class="cardtext">"{{vehicle.quote}}"</p>
+            <p class=" cardtext"><b>Owner/Driver: </b> {{vehicle.owner}}</p>
+
+            <!-- View Vehicle Button -->
+            <a 
+            class="btn btn-primary" 
+            href="{{url_for('view_vehicle', id=vehicle.id)}}" 
+            role="button"
+            >View Details</a>
+            <!-- Edit Vehicle Button -->
+            <a 
+            class="btn btn-primary" 
+            href="{{url_for('edit_vehicle', id=vehicle.id)}}" 
+            role="button"
+            >Edit Details</a>
+            <!-- Delete Vehicle Button -->
+            <a 
+            class="btn btn-primary" 
+            href="{{url_for('delete_vehicle', id=vehicle.id)}}" 
+            role="button"
+            >Delete</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{%endblock%}
+
+</body>

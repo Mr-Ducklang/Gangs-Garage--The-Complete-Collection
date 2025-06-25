@@ -41,9 +41,14 @@ def init_routes(app):
     #view database
     @app.route('/view_database', methods=['GET'])
     def view_database():
-        id = request.args.get('id')
-        database = Database.query.get(id)
-        return render_template('view_database.html', database = database)
+        dbid = request.args.get('dbid')
+        database = Database.query.get(dbid)
+        if request.args.get('name') is not None:
+            name = request.args.get('name')
+            vehicles = Vehicle.query.filter((Vehicle.name.ilike(f'%{name}%')), (Vehicle.databaseid.ilike(f'%{dbid}%'))).all()
+        else:
+            vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
+        return render_template('view_database.html', database = database, vehicles = vehicles)
 
 #edit database
     @app.route('/edit', methods=['GET'])
