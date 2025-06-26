@@ -1,7 +1,5 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<form action="/database" method="POST">
-
 <body>
   <div
     class="modal fade"
@@ -25,7 +23,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form action="/add" method="POST">
+          <form action="/add_database" method="POST">
             <!--Image-->
             <div class="mb-3">
               <label for="image" class="form-label">Image URL</label>

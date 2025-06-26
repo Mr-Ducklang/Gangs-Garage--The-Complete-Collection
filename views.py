@@ -20,15 +20,15 @@ def init_routes(app):
         return render_template('index.html', vehicles=vehicles)
     
 
-    #view databases
-    @app.route('/database', methods=['GET'])
+    #view all
+    @app.route('/databases', methods=['GET'])
     def databases():
         if request.args.get('name') is not None:
             name = request.args.get('name')
             databases = Database.query.filter(Database.name.ilike(f'%{name}%')).all()
         else:
             databases = Database.query.all()
-        return render_template('database.html', databases=databases)
+        return render_template('databases.html', databases=databases)
     
     #view vehicles
     @app.route('/view_vehicle', methods=['GET'])
@@ -50,8 +50,45 @@ def init_routes(app):
             vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
         return render_template('view_database.html', database = database, vehicles = vehicles)
 
+#add vehicle
+    @app.route('/add_vehicle', methods=['POST'])
+    def add_vehicle():
+        newvehicle = Vehicle(
+            image = request.form.get("Image"),
+            name = request.form.get("Name"),
+            quote = request.form.get("Quote"),
+            description = request.form.get("Description"),
+            odometer = request.form.get("Odometer"),
+            owner = request.form.get("Owner"),
+            type = request.form.get("Type"),
+            make = request.form.get("Make"),
+            model = request.form.get("Model"),
+            year = request.form.get("Year"),
+            features = request.form.get("Features"),
+            currentissues = request.form.get("CurrentIssues"),
+            previousissues = request.form.get("PreviousIssues"),
+            databaseid = request.form.get("databaseid")
+            )
+        db.session.add(newvehicle)
+        db.session.commit()
+        
+        return redirect(url_for('view_database'))
+
+#add database
+    @app.route('/add_database', methods=['POST'])
+    def add_database():
+        newdatabase = Database(
+            image = request.form.get("Image"),
+            name = request.form.get("Name"),
+            description = request.form.get("Description")
+            )
+        db.session.add(newdatabase)
+        db.session.commit()
+        
+        return redirect(url_for('databases'))
+
 #edit database
-    @app.route('/edit', methods=['GET'])
+    @app.route('/edit_database', methods=['GET'])
     def edit_database():
         #get database
         id = request.args.get('id')
@@ -69,11 +106,11 @@ def init_routes(app):
             database.description = request.form.get("Description")
             
             db.session.commit()
-            return redirect(url_for('database'))
+            return redirect(url_for('databases'))
 
 
     #edit vehicle
-    @app.route('/edit', methods=['GET'])
+    @app.route('/edit_vehicle', methods=['GET'])
     def edit_vehicle():
         #get vehicle
         id = request.args.get('id')
@@ -105,7 +142,7 @@ def init_routes(app):
         
 
 #delete database
-    @app.route('/delete', methods=['GET'])
+    @app.route('/delete_database', methods=['GET'])
     def delete_database():
         id = request.args.get('id')
         database = Database.query.get(id)
@@ -115,7 +152,7 @@ def init_routes(app):
         return redirect(url_for('database'))
 
     #delete vehicle
-    @app.route('/delete', methods=['GET'])
+    @app.route('/delete_vehicle', methods=['GET'])
     def delete_vehicle():
         id = request.args.get('id')
         vehicle = Vehicle.query.get(id)
