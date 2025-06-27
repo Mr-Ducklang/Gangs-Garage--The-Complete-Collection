@@ -48,7 +48,7 @@ def init_routes(app):
             vehicles = Vehicle.query.filter((Vehicle.name.ilike(f'%{name}%')), (Vehicle.databaseid.ilike(f'%{dbid}%'))).all()
         else:
             vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
-        return render_template('view_database.html', database = database, vehicles = vehicles)
+        return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all())
 
 #add vehicle
     @app.route('/add_vehicle', methods=['POST'])
@@ -72,15 +72,20 @@ def init_routes(app):
         db.session.add(newvehicle)
         db.session.commit()
         
-        return redirect(url_for('view_database'))
+        return redirect(url_for('view_database', dbid = request.form.get("databaseid")))
 
 #add database
     @app.route('/add_database', methods=['POST'])
     def add_database():
+        counter = 1
+        for i in Database:
+            counter = counter + 1
+
         newdatabase = Database(
             image = request.form.get("Image"),
             name = request.form.get("Name"),
-            description = request.form.get("Description")
+            description = request.form.get("Description"),
+            databaseid = counter
             )
         db.session.add(newdatabase)
         db.session.commit()
@@ -155,11 +160,12 @@ def init_routes(app):
     @app.route('/delete_vehicle', methods=['GET'])
     def delete_vehicle():
         id = request.args.get('id')
+        dbid = request.args.get('dbid')
         vehicle = Vehicle.query.get(id)
         db.session.delete(vehicle)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('view_database', dbid = dbid))
 
     @app.route('/signin', methods=['GET'])
     def signin():

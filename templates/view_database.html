@@ -22,7 +22,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form action="/add_vehicle" method="POST">
+          <form action="/add_vehicle" method="POST" dbid="database.databaseid">
             <!--Image-->
             <div class="mb-3">
               <label for="image" class="form-label">Image URL</label>
@@ -90,7 +90,12 @@
             </div>
             <!--databaseid-->
             <div class="mb-3">
-              <textarea id="database.databaseid" name="databaseid"></textarea>
+              <label for="message-text">Database to add vehicle to:</label>
+              <select id="databaseid" name="databaseid">
+                {% for database in databases %}
+                <option value="{{database.databaseid}}">{{database.name}}</option>
+                {% endfor %}
+              </select>
             </div>
             <button type="submit" class="btn btn-primary">Add Vehicle</button>
             <button
@@ -133,19 +138,19 @@
             <!-- View Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('view_vehicle', id=vehicle.id)}}" 
+            href="{{url_for('view_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
             role="button"
             >View Details</a>
             <!-- Edit Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('edit_vehicle', id=vehicle.id)}}" 
+            href="{{url_for('edit_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
             role="button"
             >Edit Details</a>
             <!-- Delete Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('delete_vehicle', id=vehicle.id)}}" 
+            href="{{url_for('delete_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
             role="button"
             >Delete</a>
           </div>
