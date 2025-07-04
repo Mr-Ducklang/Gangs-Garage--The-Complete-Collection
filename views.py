@@ -94,7 +94,7 @@ def init_routes(app):
         return redirect(url_for('databases'))
 
 #edit database
-    @app.route('/edit_database', methods=['GET'])
+    @app.route('/edit_database', methods=['GET', 'POST'])
     def edit_database():
         #get database
         id = request.args.get('id')
@@ -116,7 +116,7 @@ def init_routes(app):
 
 
     #edit vehicle
-    @app.route('/edit_vehicle', methods=['GET'])
+    @app.route('/edit_vehicle', methods=['GET', 'POST'])
     def edit_vehicle():
         #get vehicle
         id = request.args.get('id')
