@@ -131,6 +131,7 @@ def init_routes(app):
             vehicle = Vehicle.query.get(id)
             vehicle.image = request.form.get("Image")
             vehicle.name = request.form.get("Name")
+            vehicle.alias = request.form.get("Alias")
             vehicle.quote = request.form.get("Quote")
             vehicle.description = request.form.get("Description")
             vehicle.odometer = request.form.get("Odometer")
