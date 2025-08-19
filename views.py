@@ -1,5 +1,7 @@
+from flask import Flask
 from flask import render_template, request, redirect, url_for, flash
-from models import db, Vehicle, Database # database model imported here too 
+from models import db, Vehicle, Database, User # database model imported here too 
+import usermanagement as dbHandler
 
 def init_routes(app):
 
@@ -50,7 +52,7 @@ def init_routes(app):
             vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
         return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all())
 
-#add vehicle
+    #add vehicle
     @app.route('/add_vehicle', methods=['POST'])
     def add_vehicle():
         newvehicle = Vehicle(
@@ -74,7 +76,7 @@ def init_routes(app):
         
         return redirect(url_for('view_database', dbid = request.form.get("databaseid")))
 
-#add database
+    #add database
     @app.route('/add_database', methods=['POST'])
     def add_database():
         databases = Database.query.all()
@@ -93,7 +95,7 @@ def init_routes(app):
         
         return redirect(url_for('databases'))
 
-#edit database
+    #edit database
     @app.route('/edit_database', methods=['GET', 'POST'])
     def edit_database():
         #get database
@@ -148,7 +150,7 @@ def init_routes(app):
             return redirect(url_for('databases'))
         
 
-#delete database
+    #delete database
     @app.route('/delete_database', methods=['GET'])
     def delete_database():
         id = request.args.get('id')
@@ -168,6 +170,15 @@ def init_routes(app):
         db.session.commit()
 
         return redirect(url_for('view_database', dbid = dbid))
+
+    #create new user
+    @app.route('/signup', methods=["GET", "POST", "PUT", "POST", "DELETE"])
+    def signup():
+        if request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            DoB = request.form["dob"]
+            dbHandler.insertUser(username, password, DoB)
 
     @app.route('/signin', methods=['GET'])
     def signin():
