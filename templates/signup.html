@@ -4,14 +4,17 @@
     <div class="center blueborder solidborder">
         <h2 class="">Create An Account</h2>
         <div>
-            <div class="input__wrapper">
+            <div class="input__wrapper space">
             <input type="username" name="username" placeholder="Username" class="input__field">
         </div>            
-    <div class="input__wrapper">
+    <div class="input__wrapper space">
             <input type="password" name="password" placeholder="Password" class="input__field">
     </div>
     <div class="input_wrapper">
-        <button type="submit" class="space btn btn-primary hover">Sign Up</button>
+        <a 
+            class="space btn btn-primary hover"
+            href="{{url_for('signin')}}" 
+            role="button">Sign Up</a>
     </div>
     </div>
     <a 
@@ -20,6 +23,5 @@
             role="button">Have an Account? Log in Here</a>
 </body>
 
-    
 
 {%endblock%}
