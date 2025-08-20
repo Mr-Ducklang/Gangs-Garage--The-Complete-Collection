@@ -4,7 +4,7 @@ import random
 import bcrypt
 
 def insertUser(username, password, DoB):
-    con = sql.connect("database_files/database.db")
+    con = sql.connect("instance/collection.db")
     cur = con.cursor()
     salt = bcrypt.gensalt()
     hashedpassword = bcrypt.hashpw(password.encode("utf-8"), salt)
@@ -16,7 +16,7 @@ def insertUser(username, password, DoB):
     con.close()
 
 def retrieveUsers(username, password):
-    con = sql.connect("database_files/database.db")
+    con = sql.connect("instance/collection.db")
     cur = con.cursor()
     #SQL injection fix
     cur.execute("SELECT * FROM users WHERE username = ?",[username])
@@ -47,7 +47,7 @@ def retrieveUsers(username, password):
 
 #Added protection against Cross Site Scripting
 def insertFeedback(feedback):
-    con = sql.connect("database_files/database.db")
+    con = sql.connect("instance/collection.db")
     cur = con.cursor()
     feedback = feedback.replace("&","&amp;")
     feedback = feedback.replace("<","&lt;")
@@ -61,7 +61,7 @@ def insertFeedback(feedback):
 
 
 def listFeedback():
-    con = sql.connect("database_files/database.db")
+    con = sql.connect("instance/collection.db")
     cur = con.cursor()
     data = cur.execute("SELECT * FROM feedback").fetchall()
     con.close()

@@ -49,9 +49,14 @@
     margin: 25px;
 }
 
-.hover {
-    transform: scale(1.05);
-    background-color: #2800dc;
+.hover:hover {
+    transform: scale(1.05); 
+    background-color: #0004ff;
+    invert(100%);
+}
+
+.bluebackground {
+    background-color: #0d11ff;
 }
 
 .custom-bg:hover {
