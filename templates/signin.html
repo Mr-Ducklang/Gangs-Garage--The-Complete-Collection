@@ -1,7 +1,22 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<form action="/signin" method="POST">
+<form action="/signin" method="POST"></form>
+<body>
+    <div class="center blueborder solidborder">
+        <h2 class="">Sign in to Your Account</h2>
+        <div>
+            <div class="input__wrapper">
+            <input type="text" name="username" placeholder="Username" class="input__field">
+        </div>            
+    <div class="input__wrapper">
+            <input type="password" name="password" placeholder="Password" class="input__field">
+    </div>
+    </div>
 
-
+    <a 
+            class="padding space btn-primary btn " 
+            href="{{url_for('signup')}}" 
+            role="button">Don't have an account? Create one here</a>
+</body>
 
 {%endblock%}

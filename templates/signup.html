@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
+<form action="/signup" method="POST"></form>
+<body>
+    <div class="center blueborder solidborder">
+        <h2 class="">Create An Account</h2>
+        <div>
+            <div class="input__wrapper">
+            <input type="username" name="username" placeholder="Username" class="input__field">
+        </div>            
+    <div class="input__wrapper">
+            <input type="password" name="password" placeholder="Password" class="input__field">
+    </div>
+    <div class="input_wrapper">
+        <button type="submit" class="btn">Sign Up</button>
+    </div>
+    </div>
+    <a 
+            class="padding space btn-primary btn" 
+            href="{{url_for('signin')}}" 
+            role="button">Have an Account? Log in Here</a>
+</body>
+
+    
+
+{%endblock%}

@@ -37,6 +37,22 @@
     border-radius: 5%;
 }
 
+.smallspace {
+    margin: 5px;
+}
+
+.space {
+    margin: 10px;
+}
+
+.bigspace {
+    margin: 25px;
+}
+
+.hover {
+    transform: scale(1.05);
+    background-color: #2800dc;
+}
 
 .custom-bg:hover {
     transform: scale(1.05); 

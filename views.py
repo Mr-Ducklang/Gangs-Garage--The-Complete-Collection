@@ -179,8 +179,10 @@ def init_routes(app):
             password = request.form["password"]
             DoB = request.form["dob"]
             dbHandler.insertUser(username, password, DoB)
+        else:
+            return render_template('signup.html')
 
-    @app.route('/signin', methods=['GET'])
+    @app.route('/signin', methods=["GET"])
     def signin():
         return render_template('signin.html')
     
