@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
-<form action="/signup" method="POST"></form>
-<body>
+<form action="/signup" method="POST">
     <div class="center blueborder solidborder">
         <h2 class="">Create An Account</h2>
         <div>
@@ -10,18 +9,28 @@
     <div class="input__wrapper space">
             <input type="password" name="password" placeholder="Password" class="input__field">
     </div>
+    <div class="input__wrapper space">
+            <label for="DateofBirth">Date of Birth</label>
+            <br>
+            <select type="DateofBirth" name="Day" placeholder="Day">
+                {% for i in range(1, 31) %}
+                    <option value="{{ i }}" >{{ i }}</option>
+                {% endfor %}
+            </select>
+            <select type="DateofBirth" name="Month" placeholder="Month">>
+                <option></option>
+            </select>
+             <select type="DateofBirth" name="Year" placeholder="Year"></select>
+                <option></option>
+            </select>
+    </div>
     <div class="input_wrapper">
-        <a 
-            class="space btn btn-primary hover"
-            href="{{url_for('signin')}}" 
-            role="button">Sign Up</a>
+        <button type="submit" class="space btn btn-primary hover">Sign Up</button>
     </div>
     </div>
-    <a 
+</form>
+<a 
             class="padding space btn-secondary btn" 
             href="{{url_for('signin')}}" 
             role="button">Have an Account? Log in Here</a>
-</body>
-
-
 {%endblock%}

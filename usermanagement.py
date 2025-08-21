@@ -9,7 +9,7 @@ def insertUser(username, password, DoB):
     salt = bcrypt.gensalt()
     hashedpassword = bcrypt.hashpw(password.encode("utf-8"), salt)
     cur.execute(
-        "INSERT INTO users (username,password,dateOfBirth) VALUES (?,?,?)",
+        "INSERT INTO user (username,password,DateofBirth) VALUES (?,?,?)",
         (username, hashedpassword, DoB),
     )
     con.commit()
@@ -19,7 +19,7 @@ def retrieveUsers(username, password):
     con = sql.connect("instance/collection.db")
     cur = con.cursor()
     #SQL injection fix
-    cur.execute("SELECT * FROM users WHERE username = ?",[username])
+    cur.execute("SELECT * FROM user WHERE username = ?",[username])
     result = cur.fetchone()
     if result is None:
         con.close()
@@ -29,7 +29,7 @@ def retrieveUsers(username, password):
     hashedpassword = result[2]
     #checks user-inputted password against stored password
     if bcrypt.checkpw(password.encode("utf-8"), hashedpassword):
-        cur.execute("SELECT * FROM users WHERE password = ?",[hashedpassword])
+        cur.execute("SELECT * FROM user WHERE password = ?",[hashedpassword])
         # Plain text log of visitor count as requested by Unsecure PWA management
         with open("visitor_log.txt", "r") as file:
             number = int(file.read().strip())

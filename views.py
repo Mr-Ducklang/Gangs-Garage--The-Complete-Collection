@@ -171,14 +171,18 @@ def init_routes(app):
 
         return redirect(url_for('view_database', dbid = dbid))
 
-    #create new user
+    #creates new user; receives information from signup from and adds data to Users
     @app.route('/signup', methods=["GET", "POST", "PUT", "POST", "DELETE"])
     def signup():
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
-            DoB = request.form["dob"]
+            Day = request.form["Day"]
+            Month = request.form["Month"]
+            Year = request.form["Year"]
+            DoB = (f"{Day} | {Month} | {Year}")
             dbHandler.insertUser(username, password, DoB)
+            return render_template('signin.html')
         else:
             return render_template('signup.html')
 
