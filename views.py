@@ -180,7 +180,7 @@ def init_routes(app):
             Day = request.form["Day"]
             Month = request.form["Month"]
             Year = request.form["Year"]
-            DoB = (f"{Day} | {Month} | {Year}")
+            DoB = (f"{Day} {Month} {Year}")
             dbHandler.insertUser(username, password, DoB)
             return render_template('signin.html')
         else:
