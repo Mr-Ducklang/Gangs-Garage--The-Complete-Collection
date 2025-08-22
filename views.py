@@ -8,7 +8,11 @@ def init_routes(app):
     #menu page
     @app.route('/', methods=['GET'])
     def menu():
-        return render_template('menu.html')
+        ActiveUser=request.args.get('ActiveUser')
+        if ActiveUser is not None:
+            return render_template('menu.html', ActiveUser=ActiveUser)
+        else:
+            return render_template('menu.html', ActiveUser="Guest")
     
 
     #view all vehicles in database
@@ -21,28 +25,39 @@ def init_routes(app):
             vehicles = Vehicle.query.all()
         return render_template('index.html', vehicles=vehicles)
     
+    @app.route('/userprofile', methods=['GET'])
+    def userprofile():
+        ActiveUser=request.args.get('ActiveUser')
+        if ActiveUser is not None:
+            id = request.args.get('id')
+            user = User.query.get(id)
+            return render_template('userprofile.html', user = user, ActiveUser=ActiveUser)
+
 
     #view all
     @app.route('/databases', methods=['GET'])
     def databases():
+        ActiveUser=request.args.get('ActiveUser')
         if request.args.get('name') is not None:
             name = request.args.get('name')
             databases = Database.query.filter(Database.name.ilike(f'%{name}%')).all()
         else:
             databases = Database.query.all()
-        return render_template('databases.html', databases=databases)
+        return render_template('databases.html', databases=databases, ActiveUser=ActiveUser)
     
     #view vehicles
     @app.route('/view_vehicle', methods=['GET'])
     def view_vehicle():
+        ActiveUser=request.args.get('ActiveUser')
         id = request.args.get('id')
         vehicle = Vehicle.query.get(id)
-        return render_template('view_vehicle.html', vehicle = vehicle)
+        return render_template('view_vehicle.html', vehicle = vehicle, ActiveUser=ActiveUser)
     
 
     #view database
     @app.route('/view_database', methods=['GET'])
     def view_database():
+        ActiveUser=request.args.get('ActiveUser')
         dbid = request.args.get('dbid')
         database = Database.query.get(dbid)
         if request.args.get('name') is not None:
@@ -50,11 +65,12 @@ def init_routes(app):
             vehicles = Vehicle.query.filter((Vehicle.name.ilike(f'%{name}%')), (Vehicle.databaseid.ilike(f'%{dbid}%'))).all()
         else:
             vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
-        return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all())
+        return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all(), ActiveUser=ActiveUser)
 
     #add vehicle
     @app.route('/add_vehicle', methods=['POST'])
     def add_vehicle():
+        ActiveUser=request.args.get('ActiveUser')
         newvehicle = Vehicle(
             image = request.form.get("Image"),
             name = request.form.get("Name"),
@@ -79,6 +95,7 @@ def init_routes(app):
     #add database
     @app.route('/add_database', methods=['POST'])
     def add_database():
+        ActiveUser=request.args.get('ActiveUser')
         databases = Database.query.all()
         counter = 1
         for i in databases:
@@ -98,12 +115,13 @@ def init_routes(app):
     #edit database
     @app.route('/edit_database', methods=['GET', 'POST'])
     def edit_database():
+        ActiveUser=request.args.get('ActiveUser')
         #get database
         id = request.args.get('id')
         database = Database.query.get(id)
 
         if request.method == 'GET':
-            return render_template('edit_database.html', database = database)
+            return render_template('edit_database.html', database = database, ActiveUser=ActiveUser)
     
         if request.method == 'POST':
             
@@ -120,12 +138,13 @@ def init_routes(app):
     #edit vehicle
     @app.route('/edit_vehicle', methods=['GET', 'POST'])
     def edit_vehicle():
+        ActiveUser=request.args.get('ActiveUser')
         #get vehicle
         id = request.args.get('id')
         vehicle = Vehicle.query.get(id)
 
         if request.method == 'GET':
-            return render_template('edit_vehicle.html', vehicle = vehicle)
+            return render_template('edit_vehicle.html', vehicle = vehicle, ActiveUser=ActiveUser)
     
         if request.method == 'POST':
             
@@ -153,6 +172,7 @@ def init_routes(app):
     #delete database
     @app.route('/delete_database', methods=['GET'])
     def delete_database():
+        ActiveUser=request.args.get('ActiveUser')
         id = request.args.get('id')
         database = Database.query.get(id)
         db.session.delete(database)
@@ -163,6 +183,7 @@ def init_routes(app):
     #delete vehicle
     @app.route('/delete_vehicle', methods=['GET'])
     def delete_vehicle():
+        ActiveUser=request.args.get('ActiveUser')
         id = request.args.get('id')
         dbid = request.args.get('dbid')
         vehicle = Vehicle.query.get(id)
@@ -186,10 +207,21 @@ def init_routes(app):
         else:
             return render_template('signup.html')
 
-    @app.route('/signin', methods=["GET"])
+    @app.route('/signin', methods=["GET", "POST"])
     def signin():
-        return render_template('signin.html')
-    
+        if request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            isLoggedIn = dbHandler.retrieveUsers(username, password)
+            if isLoggedIn:
+                return render_template('menu.html', ActiveUser=username, state=isLoggedIn)
+            else:
+                return render_template('menu.html', ActiveUser="Guest")
+        else:
+            return render_template('signin.html', ActiveUser="Guest")
+            
+            
     @app.route('/quiz', methods=['GET'])
     def quiz():
+        ActiveUser=request.args.get('ActiveUser')
         return render_template('quiz.html')

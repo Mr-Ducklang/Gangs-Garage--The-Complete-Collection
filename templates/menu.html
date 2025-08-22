@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
-
+<h1 class="center">Welcome {{ ActiveUser }}!</h1>
 <body>
     <div class="center blueborder solidborder">
         <h2 class="">Gang's Garage: The Complete Collection</h2>
@@ -10,15 +10,15 @@
             role="button">Sign Up - Log in</a>
             <a 
             class="btn-primary btn" 
-            href="{{url_for('databases')}}" 
+            href="{{url_for('databases', ActiveUser=ActiveUser)}}" 
             role="button">Databases</a>
             <a 
             class="btn-primary btn" 
-            href="{{url_for('quiz')}}" 
+            href="{{url_for('quiz', ActiveUser=ActiveUser)}}" 
             role="button">Quiz</a>
             <a 
             class="btn-primary btn" 
-            href="{{url_for('index')}}" 
+            href="{{url_for('index', ActiveUser=ActiveUser)}}" 
             role="button">Index</a>
         </div>
     </div>
