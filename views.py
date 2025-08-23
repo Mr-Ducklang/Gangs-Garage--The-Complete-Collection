@@ -6,10 +6,16 @@ import usermanagement as dbHandler
 def init_routes(app):
 
     #menu page
+    @app.route('/menu', methods=['GET'])
     @app.route('/', methods=['GET'])
     def menu():
         ActiveUser=request.args.get('ActiveUser')
+        uid = request.args.get('uid')
         if ActiveUser is not None:
+            if uid is not None:
+                user = User.query.get(uid)
+                return render_template('menu.html', ActiveUser=ActiveUser, user=user)
+            
             return render_template('menu.html', ActiveUser=ActiveUser)
         else:
             return render_template('menu.html', ActiveUser="Guest")
@@ -25,13 +31,16 @@ def init_routes(app):
             vehicles = Vehicle.query.all()
         return render_template('index.html', vehicles=vehicles)
     
-    @app.route('/userprofile', methods=['GET'])
-    def userprofile():
+    #user profile loader to view and edit current user's details
+    @app.route('/user_profile', methods=['GET'])
+    def user_profile():
         ActiveUser=request.args.get('ActiveUser')
         if ActiveUser is not None:
-            id = request.args.get('id')
-            user = User.query.get(id)
-            return render_template('userprofile.html', user = user, ActiveUser=ActiveUser)
+            uid = request.args.get('uid')
+            user = User.query.get(uid)
+            return render_template('user_profile.html', user = user, ActiveUser=ActiveUser)
+        else:
+            return render_template('menu.html')
 
 
     #view all

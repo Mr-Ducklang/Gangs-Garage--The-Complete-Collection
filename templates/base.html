@@ -36,7 +36,7 @@
     <!--NAVBAR-->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{url_for('menu', ActiveUser=ActiveUser)}}">Gang's Garage</a>
+                <a class="navbar-brand" href="{{url_for('menu', ActiveUser=ActiveUser, user=user)}}">Gang's Garage</a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -49,37 +49,56 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!--Navbar list-->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    <!-- Button trigger modal -->
+                    <!-- Add Button -->
                     <button
                         type="button"
-                        class="btn"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                     >
                         Add
                     </button>
-                    <button>Current User : {{ ActiveUser }}</button>       
+
+                    <!--Dropdown menu for user options-->
                     <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
+                        <button class="dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Current User: {{ ActiveUser }}</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{url_for('user_profile', user=user)}}">User Profile</a></li>
+                        </ul>
+                    </li>
+
+                        <!--Dropdown button for "more"-->
+                    <li class="nav-item dropdown">
+                        <button
+                            class="dropdown-toggle"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
                             More
-                        </a>
+                    </button>
                         <!--Dropdown Menu-->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Add</a></li>
-                            <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                            <li><button class="dropdown-item" href="#">Add</button></li>
+                            <li><button class="dropdown-item" href="#">Contact Us</button></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><button class="dropdown-item" href="#">Something else here</button></li>
                         </ul>
                     </li>
                 </ul>
+
+
+
                 <!--Search Function-->
                 <form class="d-flex" action = "/search" method = "POST" role="search">
                     <input
