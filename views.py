@@ -10,12 +10,11 @@ def init_routes(app):
     @app.route('/', methods=['GET'])
     def menu():
         ActiveUser=request.args.get('ActiveUser')
-        uid = request.args.get('uid')
+        uid = User.query.get('uid')
         if ActiveUser is not None:
             if uid is not None:
                 user = User.query.get(uid)
                 return render_template('menu.html', ActiveUser=ActiveUser, user=user)
-            
             return render_template('menu.html', ActiveUser=ActiveUser)
         else:
             return render_template('menu.html', ActiveUser="Guest")
@@ -223,9 +222,9 @@ def init_routes(app):
             password = request.form["password"]
             isLoggedIn = dbHandler.retrieveUsers(username, password)
             if isLoggedIn:
-                return render_template('menu.html', ActiveUser=username, state=isLoggedIn)
+                return redirect(url_for('menu', ActiveUser=username, state=isLoggedIn))
             else:
-                return render_template('menu.html', ActiveUser="Guest")
+                return redirect(url_for('menu', ActiveUser="Guest"))
         else:
             return render_template('signin.html', ActiveUser="Guest")
             
