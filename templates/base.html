@@ -36,7 +36,7 @@
     <!--NAVBAR-->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{url_for('menu', ActiveUser=ActiveUser, user=user)}}">Gang's Garage</a>
+                <a class="navbar-brand" href="{{url_for('menu', ActiveUser=ActiveUser, userid=user.id)}}">Gang's Garage</a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -72,7 +72,7 @@
                         >
                             Current User: {{ ActiveUser }}</button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{url_for('user_profile', ActiveUser=ActiveUser, user=user, uid=uid)}}">User Profile</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('user_profile', ActiveUser=ActiveUser, userid=user.id)}}">User Profile</a></li>
                         </ul>
                     </li>
 

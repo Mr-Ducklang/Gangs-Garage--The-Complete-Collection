@@ -2,6 +2,9 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for, flash
 from models import db, Vehicle, Database, User # database model imported here too 
 import usermanagement as dbHandler
+import sqlite3 as sql
+import time
+import random
 
 def init_routes(app):
 
@@ -9,15 +12,17 @@ def init_routes(app):
     @app.route('/menu', methods=['GET'])
     @app.route('/', methods=['GET'])
     def menu():
+        popup = request.args.get('popup')
         ActiveUser=request.args.get('ActiveUser')
-        uid = User.query.get('uid')
+        users = User.query.all()
         if ActiveUser is not None:
-            if uid is not None:
-                user = User.query.get(uid)
-                return render_template('menu.html', ActiveUser=ActiveUser, user=user)
-            return render_template('menu.html', ActiveUser=ActiveUser)
+            userid = request.args.get('userid')
+            if userid is not None:
+                return render_template('menu.html', ActiveUser=ActiveUser, userid=userid, users=users)
+            else:
+                return render_template('menu.html', ActiveUser=ActiveUser, users=users)
         else:
-            return render_template('menu.html', ActiveUser="Guest")
+            return render_template('menu.html', ActiveUser="Guest", users=users)
     
 
     #view all vehicles in database
@@ -33,13 +38,16 @@ def init_routes(app):
     #user profile loader to view and edit current user's details
     @app.route('/user_profile', methods=['GET'])
     def user_profile():
-        ActiveUser=request.args.get('ActiveUser')
+        ActiveUser = request.args.get('ActiveUser')
+        uid = request.args.get('userid')
         if ActiveUser is not None:
-            uid = request.args.get('uid')
-            user = User.query.get(uid)
-            return render_template('user_profile.html', user = user, ActiveUser=ActiveUser)
+            if uid is not None:
+                user = User.query.get(uid)
+                return render_template('user_profile.html', user = user, ActiveUser=ActiveUser)
+            else:
+                return redirect(url_for('menu', ActiveUser=ActiveUser, popup="No User ID"))
         else:
-            return render_template('menu.html')
+            return redirect(url_for('menu', ActiveUser="Guest", popup="Guest User"))
 
 
     #view all
@@ -217,12 +225,16 @@ def init_routes(app):
 
     @app.route('/signin', methods=["GET", "POST"])
     def signin():
+        con = sql.connect("instance/collection.db")
+        cur = con.cursor()
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
             isLoggedIn = dbHandler.retrieveUsers(username, password)
             if isLoggedIn:
-                return redirect(url_for('menu', ActiveUser=username, state=isLoggedIn))
+                cur.execute("SELECT id FROM user WHERE username = ?", [username])
+                userid = cur.fetchone()
+                return redirect(url_for('menu', ActiveUser=username, state=isLoggedIn, userid=userid))
             else:
                 return redirect(url_for('menu', ActiveUser="Guest"))
         else:

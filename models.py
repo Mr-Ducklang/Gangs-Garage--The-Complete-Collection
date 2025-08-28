@@ -39,4 +39,4 @@ class User(db.Model):
     profile_pic = db.Column(db.String, nullable=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    DoB = db.Column(db.String(100), nullable=True)
+    DateofBirth = db.Column(db.String(100), nullable=True)
