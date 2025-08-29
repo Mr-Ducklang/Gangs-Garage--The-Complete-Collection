@@ -3,14 +3,14 @@ import time
 import random
 import bcrypt
 
-def insertUser(username, password, DoB):
+def insertUser(username, password, profile_pic, DoB):
     con = sql.connect("instance/collection.db")
     cur = con.cursor()
     salt = bcrypt.gensalt()
     hashedpassword = bcrypt.hashpw(password.encode("utf-8"), salt)
     cur.execute(
-        "INSERT INTO user (username,password,DateofBirth) VALUES (?,?,?)",
-        (username, hashedpassword, DoB),
+        "INSERT INTO user (username,password,profile_pic,DateofBirth) VALUES (?,?,?,?)",
+        (username, hashedpassword, profile_pic, DoB),
     )
     con.commit()
     con.close()
