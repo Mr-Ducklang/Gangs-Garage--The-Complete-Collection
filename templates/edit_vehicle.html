@@ -3,6 +3,8 @@
 <form action="/edit_vehicle" method="POST">
 
 <input type="hidden" name="id" value="{{vehicle.id}}">
+<input type="hidden" name="ActiveUser" value="{{user.username}}">
+<input type="hidden" name="userid" value="{{user.id}}">
 
   <!--Image-->
   <div class="mb-3">

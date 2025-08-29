@@ -36,6 +36,7 @@ def init_routes(app):
             vehicles = Vehicle.query.all()
         return render_template('index.html', vehicles=vehicles)
     
+
     #user profile loader to view and edit current user's details
     @app.route('/user_profile', methods=['GET'])
     def user_profile():
@@ -50,6 +51,8 @@ def init_routes(app):
         else:
             return redirect(url_for('menu', ActiveUser="Guest", popup="Guest User"))
         
+
+    #Edit User
     @app.route('/edit_user', methods=['GET', 'POST'])
     def edit_user():
         userid=request.args.get('userid')
@@ -60,22 +63,27 @@ def init_routes(app):
 
         if request.method == 'GET':
             return render_template('edit_user.html', user = user, ActiveUser=ActiveUser, userid=userid)
+        
         if request.method == 'POST':
             salt = bcrypt.gensalt()
             
+            
             id = request.form["id"]
+        
             user = User.query.get(id)
             user.profile_pic = request.form.get("Profile Picture")
             user.username = request.form.get("Username")
             password = request.form.get("Password")
             hashedpassword = bcrypt.hashpw(password.encode("utf-8"), salt)
             user.password = hashedpassword
-            
             db.session.commit()
-            return redirect(url_for('user_profile', userid=userid))
+
+            userid=request.form.get("userid")
+            ActiveUser=request.form.get("ActiveUser")
+            return redirect(url_for('user_profile', ActiveUser=ActiveUser, userid=userid))
 
 
-    #view all
+    #view all databases
     @app.route('/databases', methods=['GET'])
     def databases():
         ActiveUser=request.args.get('ActiveUser')
@@ -87,7 +95,7 @@ def init_routes(app):
             databases = Database.query.all()
         return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid)
     
-    #view vehicles
+    #view vehicle details
     @app.route('/view_vehicle', methods=['GET'])
     def view_vehicle():
         ActiveUser=request.args.get('ActiveUser')
@@ -97,7 +105,7 @@ def init_routes(app):
         return render_template('view_vehicle.html', vehicle = vehicle, ActiveUser=ActiveUser, userid=userid)
     
 
-    #view database
+    #view contents of one database
     @app.route('/view_database', methods=['GET'])
     def view_database():
         userid=request.args.get('userid')
@@ -137,7 +145,7 @@ def init_routes(app):
         
         return redirect(url_for('view_database', dbid = request.form.get("databaseid"), userid=userid))
 
-    #add database
+    #add a database
     @app.route('/add_database', methods=['POST'])
     def add_database():
         userid=request.args.get('userid')
@@ -168,7 +176,7 @@ def init_routes(app):
         database = Database.query.get(id)
 
         if request.method == 'GET':
-            return render_template('edit_database.html', database = database, ActiveUser=ActiveUser)
+            return render_template('edit_database.html', database = database, ActiveUser=ActiveUser, userid=userid)
     
         if request.method == 'POST':
             
@@ -179,7 +187,10 @@ def init_routes(app):
             database.description = request.form.get("Description")
             
             db.session.commit()
-            return redirect(url_for('databases', userid=userid))
+
+            database.image = request.form.get("userid")
+            database.name = request.form.get("ActiveUser")
+            return redirect(url_for('databases', ActiveUser=ActiveUser, userid=userid))
 
 
     #edit vehicle
@@ -258,6 +269,7 @@ def init_routes(app):
         else:
             return render_template('signup.html')
 
+    #sign in
     @app.route('/signin', methods=["GET", "POST"])
     def signin():
         con = sql.connect("instance/collection.db")

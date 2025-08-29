@@ -79,19 +79,19 @@
             <!-- View Database Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('view_database', dbid=database.databaseid, ActiveUser=ActiveUser)}}" 
+            href="{{url_for('view_database', dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >View Details</a>
             <!-- Edit Database Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('edit_database', id=database.id, dbid=database.databaseid, ActiveUser=ActiveUser)}}" 
+            href="{{url_for('edit_database', id=database.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Edit Details</a>
             <!-- Delete Database Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('delete_database', id=database.id, dbid=database.databaseid, ActiveUser=ActiveUser)}}" 
+            href="{{url_for('delete_database', id=database.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Delete</a>
           </div>

@@ -3,6 +3,8 @@
 <form action="/edit_database" method="POST">
 
 <input type="hidden" name="id" value="{{database.id}}">
+<input type="hidden" name="ActiveUser" value="{{user.username}}">
+<input type="hidden" name="userid" value="{{user.id}}">
 
   <!--Image-->
   <div class="mb-3">
