@@ -306,7 +306,9 @@ def init_routes(app):
             Purpose = request.form["Purpose"]
             Towing = request.form["Towing"]
             Carry = request.form["Carry"]
-            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carrys)
+            if 
+            
+            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, IdealVehicle=IdealVehicle)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])

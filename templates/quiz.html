@@ -2,9 +2,12 @@
 
 <a 
 class="btn-primary btn" 
-href="{{url_for('quiz_questions', ActiveUser=ActiveUser, userid=userid)}}" 
+href="{{url_for('quiz_questions', ActiveUser=ActiveUser, userid=userid, user=user)}}" 
 role="button">Quiz</a>
 
+<p><b>Place of Residence:</b> {{Residence}}<br><b>Number of people usually carried:</b> {{People}}<br><b>PRIMARY purpose of the vehicle:</b> {{Purpose}}<br><b>Amount of towing done:</b> {{Towing}}<br><b>Stuff carried often? </b>{{Carry}}</p>
+
+<p>Ideal Vehicle: {{IdealVehicle}}</p>
 
 
 {%endblock%}
