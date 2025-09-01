@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, flash
-from models import db, Vehicle, Database, User # database model imported here too 
+from models import db, Vehicle, Database, User, IdealVehicle # database model imported here too 
 import usermanagement as dbHandler
 import sqlite3 as sql
 import time
@@ -301,14 +301,20 @@ def init_routes(app):
             return render_template('quiz.html', ActiveUser=ActiveUser, userid=userid)
         
         if request.method == 'POST':
+            con = sql.connect("instance/collection.db")
+            cur = con.cursor()
+            
+
             Residence = request.form["Residence"]
             People = request.form["People"]
             Purpose = request.form["Purpose"]
             Towing = request.form["Towing"]
             Carry = request.form["Carry"]
-            if 
             
-            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, IdealVehicle=IdealVehicle)
+            Ideal="Hatchback"
+            cur.execute("SELECT description FROM idealvehicle WHERE name = ?", [Ideal])
+            Description = cur.fetchone()
+            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, Ideal=Ideal, Description=Description)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])

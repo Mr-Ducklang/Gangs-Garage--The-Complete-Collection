@@ -40,3 +40,8 @@ class User(db.Model):
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
     DateofBirth = db.Column(db.String(100), nullable=True)
+
+class IdealVehicle(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String(100), nullable=False)
