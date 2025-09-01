@@ -171,12 +171,13 @@ def init_routes(app):
     def edit_database():
         userid=request.args.get('userid')
         ActiveUser=request.args.get('ActiveUser')
+        user = User.query.get(userid)
         #get database
         id = request.args.get('id')
         database = Database.query.get(id)
 
         if request.method == 'GET':
-            return render_template('edit_database.html', database = database, ActiveUser=ActiveUser, userid=userid)
+            return render_template('edit_database.html', database = database, ActiveUser=ActiveUser, userid=userid, user=user)
     
         if request.method == 'POST':
             
@@ -188,8 +189,8 @@ def init_routes(app):
             
             db.session.commit()
 
-            database.image = request.form.get("userid")
-            database.name = request.form.get("ActiveUser")
+            userid=request.form.get("userid")
+            ActiveUser=request.form.get("ActiveUser")
             return redirect(url_for('databases', ActiveUser=ActiveUser, userid=userid))
 
 
@@ -198,12 +199,13 @@ def init_routes(app):
     def edit_vehicle():
         userid=request.args.get('userid')
         ActiveUser=request.args.get('ActiveUser')
+        user = User.query.get(userid)
         #get vehicle
         id = request.args.get('id')
         vehicle = Vehicle.query.get(id)
 
         if request.method == 'GET':
-            return render_template('edit_vehicle.html', vehicle = vehicle, ActiveUser=ActiveUser)
+            return render_template('edit_vehicle.html', vehicle = vehicle, ActiveUser=ActiveUser, user=user)
     
         if request.method == 'POST':
             
@@ -225,7 +227,9 @@ def init_routes(app):
             vehicle.previousissues = request.form.get("PreviousIssues")
                 
             db.session.commit()
-            return redirect(url_for('databases', userid=userid))
+            userid=request.form.get("userid")
+            ActiveUser=request.form.get("ActiveUser")
+            return redirect(url_for('databases', ActiveUser=ActiveUser, userid=userid))
         
 
     #delete database
@@ -288,8 +292,30 @@ def init_routes(app):
             return render_template('signin.html', ActiveUser="Guest")
             
             
-    @app.route('/quiz', methods=['GET'])
+    @app.route('/quiz', methods=['GET','POST'])
     def quiz():
         userid=request.args.get('userid')
         ActiveUser=request.args.get('ActiveUser')
-        return render_template('quiz.html', ActiveUser=ActiveUser, userid=userid)
+
+        if request.method == 'GET':
+            return render_template('quiz.html', ActiveUser=ActiveUser, userid=userid)
+        
+        if request.method == 'POST':
+            Residence = request.form["Residence"]
+            People = request.form["People"]
+            Purpose = request.form["Purpose"]
+            Towing = request.form["Towing"]
+            Carry = request.form["Carry"]
+            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carrys)
+
+    
+    @app.route('/quiz_questions', methods=['GET', 'POST'])
+    def quiz_questions():
+        userid=request.args.get('userid')
+        ActiveUser=request.args.get('ActiveUser')
+        id=userid
+        user = User.query.get(id)
+        if request.method == 'GET':
+            return render_template('quiz_questions.html', ActiveUser=ActiveUser, userid=userid, user=user)
+
+

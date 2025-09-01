@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
+
+<form action="/quiz" method="POST">
+
+<input type="hidden" name="id" value="{{user.id}}">
+<input type="hidden" name="ActiveUser" value="{{user.username}}">
+<input type="hidden" name="userid" value="{{user.id}}">
+
+<div class="">
+        <h2 class="">Vehicle Quiz</h2>
+        
+    <div class="input__wrapper space">
+        <label for="Residence">Which best describes where you live?</label>
+        <br>
+        <select name="Residence" id="Residence">
+            <option value="Suburbs">In the suburbs</option>
+            <option value="Outskirts">In the outskirts of town, some other houses nearby but not lined down the street</option>
+            <option value="City">In the city</option>
+            <option value="Middle of nowhere">Very far from town, along some gravel roads</option>
+            <option value="Farm">On a farm</option>
+        </select>
+    </div>
+    <div class="input__wrapper space">
+        <label for="People">How many people do you usually transport?</label>
+        <br>
+        <select name="People" id="People">
+            <option value="1">Just myself</option>
+            <option value="2">2</option>
+            <option value="3-4">3-4</option>
+            <option value="5-6">5-6</option>
+            <option value="7+">7+</option>
+        </select>
+    </div>
+    <div class="input__wrapper space">
+        <label for="Purpose">What will the vehicles <u>primary</u> purpose be?</label>
+        <br>
+        <select name="Purpose" id="Purpose">
+            <option value="Daily Runabout">A Daily runabout: eg; take me from home to work, and stop by the shops on the way home...</option>
+            <option value="Family Daily Runabout">A Daily runabout for a family, e.g; take the kids to school, then go to the shops, to work, etc...</option>
+            <option value="Farm">Mainly used on a farm, transporting goods both in and outside the property, making the occasional trip to town</option>
+            <option value="Fun">Mainly driven for the thrill of driving</option>
+            <option value="Off-Road">Almost exclusively driven off road</option>
+            <option value="Utility">Regularly carrying heavy work supplies such as an electrican, plumber, or construction worker's tools and supplies</option>
+            <option value="Workhorse">Primarily used as a quick and easy way of transporting a lot of goods, usually by chucking them in the back of the vehicle</option>
+        </select>
+    </div>
+    <div class="input__wrapper space">
+        <label for="Towing">How often will you be towing something?</label>
+        <br>
+        <select name="Towing" id="Towing">
+            <option value="Never">Never</option>
+            <option value="Yearly">Only a couple of times a year</option>
+            <option value="Semi-Yearly">At least every 6 months</option>
+            <option value="Quarterly">At least every 3 months</option>
+            <option value="Monthly">Every month</option>
+            <option value="Every Week">Almost every Week</option>
+            <option value="Every Day">Almost every Day</option>
+        </select>
+    </div>
+    <div class="input__wrapper space">
+        <label for="Carry">Do you <u>frequently</u> carry a lot of goods?</label>
+        <br>
+        <select name="Carry" id="Carry">
+            <option value="No">No, the boot/tray is usually quite empty</option>
+            <option value="Yes">Yes, the boot/tray is usually full</option>
+        </select>
+    </div>
+    <div class="input_wrapper">
+        <button type="submit" class="space btn btn-primary hover">Finish</button>
+    </div>
+    </div>
+</form>
+
+
+{%endblock%}

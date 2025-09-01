@@ -1,6 +1,9 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<form action="/quiz" method="POST">
+<a 
+class="btn-primary btn" 
+href="{{url_for('quiz_questions', ActiveUser=ActiveUser, userid=userid)}}" 
+role="button">Quiz</a>
 
 
 

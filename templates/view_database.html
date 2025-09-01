@@ -143,19 +143,19 @@
             <!-- View Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('view_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
+            href="{{url_for('view_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >View Details</a>
             <!-- Edit Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('edit_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
+            href="{{url_for('edit_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Edit Details</a>
             <!-- Delete Vehicle Button -->
             <a 
             class="btn btn-primary" 
-            href="{{url_for('delete_vehicle', id=vehicle.id, dbid=database.databaseid)}}" 
+            href="{{url_for('delete_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Delete</a>
           </div>
