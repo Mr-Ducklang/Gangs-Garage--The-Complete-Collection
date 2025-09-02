@@ -303,7 +303,16 @@ def init_routes(app):
         if request.method == 'POST':
             con = sql.connect("instance/collection.db")
             cur = con.cursor()
-            
+
+            Sports=0
+            Sedan=0
+            Hatchback=0
+            StationWagon = 0
+            Minivan=0
+            Van = 0
+            SUV=0
+            Ute=0
+            Ute4WD=0
 
             Residence = request.form["Residence"]
             People = request.form["People"]
@@ -311,6 +320,299 @@ def init_routes(app):
             Towing = request.form["Towing"]
             Carry = request.form["Carry"]
             
+            #First Question: Residence
+            if Residence == "Suburbs": 
+                Sports += 3
+                Sedan += 3
+                Hatchback += 3
+                StationWagon +=3
+                Minivan +=3
+                Van += 2
+                SUV += 1
+                Ute +=2
+                Ute4WD +=1
+
+            elif Residence == "Outskirts":
+                Sports += 3
+                Sedan += 2
+                Hatchback += 2
+                StationWagon +=3
+                Minivan +=3
+                Van += 2
+                SUV += 1
+                Ute += 2
+                Ute4WD += 2
+
+            elif Residence == "City":
+                Sports += 3
+                Sedan += 3
+                Hatchback += 3
+                StationWagon +=3
+                Minivan +=2
+                Van += 1
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            elif Residence == "Far From Town":
+                Sports += 2
+                Sedan += 2
+                Hatchback += 2
+                StationWagon += 3
+                Minivan += 3
+                Van += 2
+                SUV += 2
+                Ute += 2
+                Ute4WD += 2
+
+            elif Residence == "Farm":
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 2
+                Van += 2
+                SUV += 2
+                Ute += 3
+                Ute4WD += 3
+
+            #Second Question: People
+            if People == "1": 
+                Sports += 3
+                Sedan += 2
+                Hatchback += 3
+                StationWagon += 1
+                Minivan += 1
+                Van += 2
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            elif People == "2": 
+                Sports += 3
+                Sedan += 2
+                Hatchback += 3
+                StationWagon += 2
+                Minivan += 1
+                Van += 2
+                SUV += 1
+                Ute += 2
+                Ute4WD += 1
+
+            elif People == "3-4": 
+                Sports += 1
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 3
+                Minivan += 2
+                Van += 2
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            elif People == "5-6": 
+                Sports += 1
+                Sedan += 2
+                Hatchback += 1
+                StationWagon += 3
+                Minivan += 3
+                Van += 3
+                SUV += 2
+                Ute += 1
+                Ute4WD += 1
+
+            elif People == "7+": 
+                Sports += 1
+                Sedan += 2
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 3
+                Van += 3
+                SUV += 2
+                Ute += 1
+                Ute4WD += 1
+
+
+            #Third Question: Purpose
+            if Purpose == "Daily Runabout": 
+                Sports += 2
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 2
+                Minivan += 2
+                Van += 2
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            elif Purpose == "Family Daily Runabout":
+                Sports += 1
+                Sedan += 3
+                Hatchback += 2
+                StationWagon += 3
+                Minivan += 3
+                Van += 1
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+            
+            elif Purpose == "Farm": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 1
+                Van += 3
+                SUV += 2
+                Ute += 3
+                Ute4WD += 3
+            
+            elif Purpose == "Fun": 
+                Sports += 3
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 1
+                Minivan += 1
+                Van += 1
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            elif Purpose == "Off-Road": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon += 1
+                Minivan += 1
+                Van += 1
+                SUV += 3
+                Ute += 2
+                Ute4WD += 3
+
+            elif Purpose == "Utility": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 2
+                Van += 3
+                SUV += 1
+                Ute += 3
+                Ute4WD += 2
+
+            elif Purpose == "Workhorse": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 2
+                StationWagon += 3
+                Minivan += 2
+                Van += 3
+                SUV += 1
+                Ute += 3
+                Ute4WD += 2
+
+            #Fourth Question: Towing
+            if Towing == "Never": 
+                Sports += 3
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 3
+                Minivan += 3
+                SUV += 1
+                Ute += 2
+                Ute4WD += 1
+
+            elif Towing == "Yearly": 
+                Sports += 2
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 3
+                Minivan += 2
+                Van += 3
+                SUV += 1
+                Ute += 2
+                Ute4WD += 1
+
+            elif Towing == "Semi-Yearly": 
+                Sports += 1
+                Sedan += 2
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 2
+                Van +=  3
+                SUV += 2
+                Ute += 2
+                Ute4WD += 2
+
+            elif Towing == "Quarterly": 
+                Sports += 1
+                Sedan += 2
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 2
+                Van += 2
+                SUV += 2
+                Ute += 2
+                Ute4WD += 2
+
+            elif Towing == "Monthly": 
+                Sports += 1
+                Sedan += 2
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 1
+                Van += 1
+                SUV += 2
+                Ute += 2
+                Ute4WD += 2
+
+            elif Towing == "Every Week": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon += 2
+                Minivan += 1
+                Van += 1
+                SUV += 3
+                Ute += 3
+                Ute4WD += 2
+
+            elif Towing == "Every Day": 
+                Sports += 1
+                Sedan += 1
+                Hatchback += 1
+                StationWagon +=2
+                Minivan +=1
+                Van += 1
+                SUV += 3
+                Ute += 3
+                Ute4WD += 3
+
+            #Fifth Question: Carry
+            if Carry == "No": 
+                Sports += 3
+                Sedan += 3
+                Hatchback += 3
+                StationWagon += 2
+                Minivan += 2
+                Van += 2
+                SUV += 1
+                Ute += 1
+                Ute4WD += 1
+
+            if Carry == "": 
+                Sports += 
+                Sedan += 
+                Hatchback += 
+                StationWagon +=
+                Minivan +=
+                Van += 
+                SUV += 
+                Ute +=
+                Ute4WD +=
+
+
+
             Ideal="Hatchback"
             cur.execute("SELECT description FROM idealvehicle WHERE name = ?", [Ideal])
             Description = cur.fetchone()

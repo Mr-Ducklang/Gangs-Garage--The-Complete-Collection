@@ -18,6 +18,8 @@
 /* Custom styles for cards */
 .card {
     transition: transform 0.1s ease-in-out;
+    height: 450px;
+    object-fit: cover;
 }
 
 .card-img-top {
