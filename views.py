@@ -318,20 +318,20 @@ def init_routes(app):
                 options["Sports Car"] += 3
                 options["Sedan"] += 3
                 options["Hatchback"] += 3
-                options["Station Wagon"] +=3
-                options["Minivan"] +=3
-                options["Van"] += 2
+                options["Station Wagon"] += 3
+                options["Minivan"] += 3
+                options["Van"] += 3
                 options["SUV"] += 1
-                options["Ute"] +=2
+                options["Ute"] += 2
 
 
             elif Residence == "Outskirts":
                 options["Sports Car"] += 3
                 options["Sedan"] += 2
                 options["Hatchback"] += 2
-                options["Station Wagon"] +=3
-                options["Minivan"] +=3
-                options["Van"] += 2
+                options["Station Wagon"] += 3
+                options["Minivan"] += 3
+                options["Van"] += 3
                 options["SUV"] += 1
                 options["Ute"] += 2
                 
@@ -340,11 +340,11 @@ def init_routes(app):
                 options["Sports Car"] += 3
                 options["Sedan"] += 3
                 options["Hatchback"] += 3
-                options["Station Wagon"] +=3
-                options["Minivan"] +=2
+                options["Station Wagon"] += 2
+                options["Minivan"] += 2
                 options["Van"] += 2
-                options["SUV"] += 1
-                options["Ute"] += 1
+                options["SUV"] += -1
+                options["Ute"] += 0
 
 
             elif Residence == "Far From Town":
@@ -353,7 +353,7 @@ def init_routes(app):
                 options["Hatchback"] += 2
                 options["Station Wagon"] += 3
                 options["Minivan"] += 3
-                options["Van"] += 2
+                options["Van"] += 3
                 options["SUV"] += 2
                 options["Ute"] += 2
                 
@@ -363,9 +363,9 @@ def init_routes(app):
                 options["Sedan"] += 1
                 options["Hatchback"] += 1
                 options["Station Wagon"] += 2
-                options["Minivan"] += 2
+                options["Minivan"] += 1
                 options["Van"] += 2
-                options["SUV"] += 2
+                options["SUV"] += 3
                 options["Ute"] += 3
 
 
@@ -377,7 +377,7 @@ def init_routes(app):
                 options["Station Wagon"] += 1
                 options["Minivan"] += 1
                 options["Van"] += 2
-                options["SUV"] += 1
+                options["SUV"] += -1
                 options["Ute"] += 1
 
 
@@ -388,12 +388,12 @@ def init_routes(app):
                 options["Station Wagon"] += 2
                 options["Minivan"] += 1
                 options["Van"] += 2
-                options["SUV"] += 1
-                options["Ute"] += 2
+                options["SUV"] += -1
+                options["Ute"] += 1
 
 
-            elif People == "3-4": 
-                options["Sports Car"] += -1
+            elif People == "3-5": 
+                options["Sports Car"] += -5
                 options["Sedan"] += 3
                 options["Hatchback"] += 3
                 options["Station Wagon"] += 3
@@ -404,8 +404,8 @@ def init_routes(app):
 
 
             elif People == "5-6": 
-                options["Sports Car"] += -2
-                options["Sedan"] += 2
+                options["Sports Car"] += -5
+                options["Sedan"] += 1
                 options["Hatchback"] += 1
                 options["Station Wagon"] += 3
                 options["Minivan"] += 3
@@ -415,14 +415,14 @@ def init_routes(app):
 
 
             elif People == "7+": 
-                options["Sports Car"] += -3
-                options["Sedan"] += 1
-                options["Hatchback"] += 0
-                options["Station Wagon"] += 2
+                options["Sports Car"] += -5
+                options["Sedan"] += -5
+                options["Hatchback"] += -5
+                options["Station Wagon"] += 3
                 options["Minivan"] += 3
                 options["Van"] += 3
-                options["SUV"] += 2
-                options["Ute"] += 1
+                options["SUV"] += 3
+                options["Ute"] += -5
 
 
 
@@ -440,18 +440,18 @@ def init_routes(app):
 
             elif Purpose == "Family Daily Runabout":
                 options["Sports Car"] += 0
-                options["Sedan"] += 3
+                options["Sedan"] += 2
                 options["Hatchback"] += 2
                 options["Station Wagon"] += 3
                 options["Minivan"] += 3
                 options["Van"] += 1
-                options["SUV"] += 0
-                options["Ute"] += 1
+                options["SUV"] += 1
+                options["Ute"] += 0
 
             
-            elif Purpose == "Farm": 
-                options["Sports Car"] += 1
-                options["Sedan"] += 1
+            elif Purpose == "Farm Vehicle": 
+                options["Sports Car"] += -3
+                options["Sedan"] += 0
                 options["Hatchback"] += 1
                 options["Station Wagon"] += 2
                 options["Minivan"] += 1
@@ -465,40 +465,40 @@ def init_routes(app):
                 options["Sedan"] += 2
                 options["Hatchback"] += 2
                 options["Station Wagon"] += 1
-                options["Minivan"] += 0
-                options["Van"] += 0
-                options["SUV"] += 0
-                options["Ute"] += 0
+                options["Minivan"] += -1
+                options["Van"] += -1
+                options["SUV"] += -1
+                options["Ute"] += -1
 
 
             elif Purpose == "Off-Road": 
-                options["Sports Car"] += 0
-                options["Sedan"] += 0
-                options["Hatchback"] += 0
-                options["Station Wagon"] += 1
-                options["Minivan"] += 0
-                options["Van"] += 0
+                options["Sports Car"] += -3
+                options["Sedan"] += -3
+                options["Hatchback"] += -3
+                options["Station Wagon"] += 0
+                options["Minivan"] += -2
+                options["Van"] += -2
                 options["SUV"] += 3
                 options["Ute"] += 3
 
 
             elif Purpose == "Utility": 
-                options["Sports Car"] += 1
-                options["Sedan"] += 1
-                options["Hatchback"] += 1
-                options["Station Wagon"] += 2
-                options["Minivan"] += 2
+                options["Sports Car"] += -3
+                options["Sedan"] += -1
+                options["Hatchback"] += -1
+                options["Station Wagon"] += 1
+                options["Minivan"] += 0
                 options["Van"] += 3
                 options["SUV"] += 1
                 options["Ute"] += 3
                 
 
             elif Purpose == "Workhorse": 
-                options["Sports Car"] += 0
-                options["Sedan"] += 1
-                options["Hatchback"] += 1
-                options["Station Wagon"] += 2
-                options["Minivan"] += 2
+                options["Sports Car"] += -2
+                options["Sedan"] += -1
+                options["Hatchback"] += 0
+                options["Station Wagon"] += 1
+                options["Minivan"] += 0
                 options["Van"] += 3
                 options["SUV"] += 1
                 options["Ute"] += 3
@@ -583,8 +583,18 @@ def init_routes(app):
 
 
             #Fifth Question: Carry
-            if Carry == "No": 
+            if Carry == "Strong No": 
                 options["Sports Car"] += 3
+                options["Sedan"] += 3
+                options["Hatchback"] += 2
+                options["Station Wagon"] += 2
+                options["Minivan"] += 1
+                options["Van"] += 0
+                options["SUV"] += -1
+                options["Ute"] += 0
+
+            elif Carry == "No": 
+                options["Sports Car"] += 2
                 options["Sedan"] += 3
                 options["Hatchback"] += 3
                 options["Station Wagon"] += 2
@@ -593,9 +603,18 @@ def init_routes(app):
                 options["SUV"] += 0
                 options["Ute"] += 1
 
-
             elif Carry == "Yes": 
                 options["Sports Car"] += 1
+                options["Sedan"] += 1
+                options["Hatchback"] += 2
+                options["Station Wagon"] += 3
+                options["Minivan"] += 2
+                options["Van"] += 3
+                options["SUV"] += 1
+                options["Ute"] += 2
+
+            elif Carry == "Strong Yes": 
+                options["Sports Car"] += 0
                 options["Sedan"] += 1
                 options["Hatchback"] += 2
                 options["Station Wagon"] += 3
@@ -606,6 +625,7 @@ def init_routes(app):
 
 
             highest = max(options, key=options.get)
+
             rank = sorted(options.items(), key=lambda item: item[1], reverse=True)
             rank = dict(rank)
             vehicle = rank.keys
@@ -613,7 +633,7 @@ def init_routes(app):
 
             cur.execute("SELECT description FROM idealvehicle WHERE name = ?", [highest])
             Description = cur.fetchone()
-            return render_template('quiz.html', Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, Description=Description, highest=highest, options = options, rank = rank, ranked = ranked, vehicle = vehicle)
+            return render_template('quiz.html', rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, Description=Description, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])
