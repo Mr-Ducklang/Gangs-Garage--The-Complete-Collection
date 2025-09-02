@@ -7,9 +7,11 @@ role="button">Quiz</a>
 
 <p><b>Place of Residence:</b> {{Residence}}<br><b>Number of people usually carried:</b> {{People}}<br><b>PRIMARY purpose of the vehicle:</b> {{Purpose}}<br><b>Amount of towing done:</b> {{Towing}}<br><b>Stuff carried often? </b>{{Carry}}</p>
 
-<p>Ideal Vehicle: {{Ideal}}</p>
+<p>Ideal Vehicle: {{highest}}</p>
 
-<p>{{ Description }}</p>
-
+<p><b>Ranking: </b></p>
+{% for key, value in rank.items() %}
+    {% print("{}: {}".format(key, value)) %}<br>
+{% endfor %}
 
 {%endblock%}
