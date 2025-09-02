@@ -428,7 +428,7 @@ def init_routes(app):
 
             #Third Question: Purpose
             if Purpose == "Daily Runabout": 
-                options["Sports Car"] += 1
+                options["Sports Car"] += -1
                 options["Sedan"] += 3
                 options["Hatchback"] += 3
                 options["Station Wagon"] += 2
@@ -586,7 +586,7 @@ def init_routes(app):
             if Carry == "Strong No": 
                 options["Sports Car"] += 3
                 options["Sedan"] += 3
-                options["Hatchback"] += 2
+                options["Hatchback"] += 3
                 options["Station Wagon"] += 2
                 options["Minivan"] += 1
                 options["Van"] += 0
