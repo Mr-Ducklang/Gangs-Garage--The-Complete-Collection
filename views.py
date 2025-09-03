@@ -451,11 +451,11 @@ def init_routes(app):
             
             elif Purpose == "Farm Vehicle": 
                 options["Sports Car"] += -3
-                options["Sedan"] += 0
-                options["Hatchback"] += 1
-                options["Station Wagon"] += 2
-                options["Minivan"] += 1
-                options["Van"] += 3
+                options["Sedan"] += -1
+                options["Hatchback"] += -1
+                options["Station Wagon"] += 0
+                options["Minivan"] += 0
+                options["Van"] += 2
                 options["SUV"] += 3
                 options["Ute"] += 3
 
@@ -472,14 +472,14 @@ def init_routes(app):
 
 
             elif Purpose == "Off-Road": 
-                options["Sports Car"] += -3
-                options["Sedan"] += -3
-                options["Hatchback"] += -3
-                options["Station Wagon"] += 0
-                options["Minivan"] += -2
-                options["Van"] += -2
-                options["SUV"] += 3
-                options["Ute"] += 3
+                options["Sports Car"] += -6
+                options["Sedan"] += -5
+                options["Hatchback"] += -6
+                options["Station Wagon"] += -3
+                options["Minivan"] += -4
+                options["Van"] += -3
+                options["SUV"] += 5
+                options["Ute"] += 5
 
 
             elif Purpose == "Utility": 
@@ -550,19 +550,19 @@ def init_routes(app):
                 
 
             elif Towing == "Monthly": 
-                options["Sports Car"] += -1
-                options["Sedan"] += 1
-                options["Hatchback"] += 0
-                options["Station Wagon"] += 2
-                options["Minivan"] += 1
-                options["Van"] += 1
-                options["SUV"] += 2
-                options["Ute"] += 2
+                options["Sports Car"] += -2
+                options["Sedan"] += 0
+                options["Hatchback"] += -1
+                options["Station Wagon"] += 1
+                options["Minivan"] += 0
+                options["Van"] += 0
+                options["SUV"] += 3
+                options["Ute"] += 3
                 
 
             elif Towing == "Every Week": 
-                options["Sports Car"] += -2
-                options["Sedan"] += 1
+                options["Sports Car"] += -3
+                options["Sedan"] += -1
                 options["Hatchback"] += 0
                 options["Station Wagon"] += 1
                 options["Minivan"] += 0
@@ -620,7 +620,7 @@ def init_routes(app):
                 options["Station Wagon"] += 3
                 options["Minivan"] += 2
                 options["Van"] += 3
-                options["SUV"] += 2
+                options["SUV"] += 3
                 options["Ute"] += 3
 
 

@@ -1,8 +1,10 @@
 /* General Stuff */
 .center {
-    margin: auto;
-    text-align: center;
-    width: 50%;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 
 }
 
