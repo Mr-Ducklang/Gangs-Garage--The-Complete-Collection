@@ -9,9 +9,29 @@ role="button">Quiz</a>
 
 <p>Ideal Vehicle: {{highest}}</p>
 
-<p><b>Ranking: </b></p>
-{% for key, value in rank.items() %}
-    {% print("{}: {}".format(key, value)) %}<br>
+{% for vehicle in ideal %}
+    <img
+        src="{{vehicle.image}}"
+        class="idealcar"
+        alt="Picture of {{vehicle.name}}"
+        />
+    <img
+        src="{{vehicle.image2}}"
+        class="idealcar"
+        alt="Picture of {{vehicle.name}}"
+        />
+    <img
+        src="{{vehicle.image3}}"
+        class="idealcar"
+        alt="Picture of {{vehicle.name}}"
+        />
+    <p>{{vehicle.description}}</p>
 {% endfor %}
+
+<p><b>Ranking: </b><br><small>(higher points is better)</small></p>
+{% for key, value in rank.items() %}
+    {% print("{}: {} points".format(key, value)) %}<br>
+{% endfor %}
+<br>
 
 {%endblock%}

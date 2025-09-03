@@ -418,10 +418,10 @@ def init_routes(app):
                 options["Sports Car"] += -5
                 options["Sedan"] += -5
                 options["Hatchback"] += -5
-                options["Station Wagon"] += 3
+                options["Station Wagon"] += 1
                 options["Minivan"] += 3
                 options["Van"] += 3
-                options["SUV"] += 3
+                options["SUV"] += 2
                 options["Ute"] += -5
 
 
@@ -616,7 +616,7 @@ def init_routes(app):
             elif Carry == "Strong Yes": 
                 options["Sports Car"] += 0
                 options["Sedan"] += 1
-                options["Hatchback"] += 2
+                options["Hatchback"] += 0
                 options["Station Wagon"] += 3
                 options["Minivan"] += 2
                 options["Van"] += 3
@@ -625,15 +625,15 @@ def init_routes(app):
 
 
             highest = max(options, key=options.get)
+        
 
             rank = sorted(options.items(), key=lambda item: item[1], reverse=True)
             rank = dict(rank)
             vehicle = rank.keys
             ranked = rank.values
 
-            cur.execute("SELECT description FROM idealvehicle WHERE name = ?", [highest])
-            Description = cur.fetchone()
-            return render_template('quiz.html', rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, Description=Description, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
+            ideal = IdealVehicle.query.filter(IdealVehicle.name.ilike(f'{highest}')).all()
+            return render_template('quiz.html', ideal = ideal, rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])
