@@ -30,6 +30,7 @@ class Database(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     databaseid = db.Column(db.Integer, nullable = False)
+    userid = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<Task {self.Title}>'   

@@ -93,9 +93,9 @@ def init_routes(app):
     def databases():
         ActiveUser=request.args.get('ActiveUser')
         userid=request.args.get('userid')
-        if request.args.get('name') is not None:
-            name = request.args.get('name')
-            databases = Database.query.filter(Database.name.ilike(f'%{name}%')).all()
+        if request.args.get('userid') is not None:
+            userid = request.args.get('userid')
+            databases = Database.query.filter(Database.userid.ilike(f'%{userid}%')).all()
         else:
             databases = Database.query.all()
         return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid)
