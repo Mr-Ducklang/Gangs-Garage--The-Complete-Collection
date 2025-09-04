@@ -1,22 +1,25 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
 <form action="/signin" method="POST">
-    <div class="center blueborder solidborder">
-        <h2 class="">Sign in to Your Account</h2>
+    <div class="center border whiteborder brownbackground" style="padding: 20px; padding-bottom: 300px">
+        <h2 class="whitetext">Sign in to Your Account</h2>
         <div>
-            <div class="input__wrapper">
+            <div 
+            class="input__wrapper" 
+            style="text-align: center">
             <input type="text" name="username" placeholder="Username" class="input__field">
         </div>            
-    <div class="input__wrapper">
+        <br>
+    <div class="input__wrapper" style="text-align: center">
             <input type="password" name="password" placeholder="Password" class="input__field">
     </div>
-    <div class="input_wrapper">
-        <button type="submit" class="space btn btn-primary hover">Sign In</button>
+    <div class="input_wrapper" style="text-align: center">
+        <button type="submit" class="space green-btn btn btn-primary">Sign In</button>
     </div>
     </div>
 
     <a 
-            class="padding space btn-primary btn " 
+            class="padding space btn-secondary btn hover" 
             href="{{url_for('signup')}}" 
             role="button">Don't have an account? Create one here</a>
 </form>

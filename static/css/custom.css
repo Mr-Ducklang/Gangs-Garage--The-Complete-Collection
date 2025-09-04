@@ -1,17 +1,53 @@
 /* General Stuff */
 .center {
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    position: absolute;
+    width: auto;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%)
 
+}
+
+.blackbackground {
+    background-color: #222224;
+}
+
+.brownbackground {
+    background-color: #4a3015;
+}
+
+.corkbackground {
+    background-image: url(static/CorkTexture.jpeg);
+}
+
+.whitetext {
+    color: white
+}
+
+.othercenter {
+    position: absolute;
+    width: 400px;
+    height: 150px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -70px 0 0 -200px;
 }
 
 .solidborder {
     border-style: solid; 
-    border-radius: 8px;
-    padding: 2px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.border {
+    border-style: groove; 
+}
+
+.whiteborder {
+    border-color: white;
 }
 
 .blueborder {
@@ -26,11 +62,11 @@
 
 .idealcar {
     height: 100%;
-    max-height:300px ;
-    min-height: 200px;
+    max-height:200px ;
+    min-height: 110px;
     width: 100%;
-    max-width:400px ;
-    min-width: 250px;
+    max-width:360px ;
+    min-width: 300px;
     object-fit: cover;
     border: solid;
     border-color: black;
@@ -68,8 +104,9 @@
 
 .hover:hover {
     transform: scale(1.05); 
-    background-color: #0004ff;
+    background-color: #474af5;
     mix-blend-mode: difference;
+    color: white
 }
 
 .bluebackground {
@@ -79,12 +116,25 @@
 .custom-bg:hover {
     transform: scale(1.05); 
     background-color: #551800;
-    -webkit-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
+    -webkit-transition: background-color 25ms linear;
+    -ms-transition: background-color 25ms linear;
+    transition: background-color 25ms linear;
 }
 
 /* Custom button style */
+
+.titlelink {
+    color:white
+}
+
+.titlelink:hover {
+    color:white;
+    transform: scale(1.1);
+    text-decoration: underline;
+    transition: background-color 25ms linear;
+    -webkit-transition: background-color 250ms linear;
+}
+
 .btn-custom {
     background-color: #6c5ce7;
     color: white;
@@ -93,6 +143,18 @@
 .btn-custom:hover {
     background-color: #ffffff;
     color: white;
+}
+
+.green-btn {
+    background-color: #394B39;
+    color: white;
+    border-color: aliceblue
+}
+
+.green-btn:hover {
+    background-color: #2de4d2;
+    color: black;
+    border-color: black
 }
 
 /* Custom background for specific sections */

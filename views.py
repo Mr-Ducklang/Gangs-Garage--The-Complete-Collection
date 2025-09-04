@@ -40,10 +40,15 @@ def init_routes(app):
     #user profile loader to view and edit current user's details
     @app.route('/user_profile', methods=['GET'])
     def user_profile():
+        con = sql.connect("instance/collection.db")
+        cur = con.cursor()
         ActiveUser = request.args.get('ActiveUser')
         uid = request.args.get('userid')
+        uid = int(uid)
+        username = ActiveUser
+        user = User.query.get(username)
         if ActiveUser is not None:
-            if uid is not None:
+            if uid >0:
                 user = User.query.get(uid)
                 return render_template('user_profile.html', user = user, ActiveUser=ActiveUser)
             else:

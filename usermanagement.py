@@ -15,6 +15,16 @@ def insertUser(username, password, profile_pic, DoB):
     con.commit()
     con.close()
 
+def retrieveUser(username):
+    con = sql.connect("instance/collection.db")
+    cur = con.cursor()
+    #SQL injection fix
+    cur.execute("SELECT * FROM user WHERE username = ?",[username])
+    result = cur.fetchone()
+    if result is None:
+        con.close()
+        return False
+
 def retrieveUsers(username, password):
     con = sql.connect("instance/collection.db")
     cur = con.cursor()
