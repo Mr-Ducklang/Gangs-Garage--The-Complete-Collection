@@ -1,75 +1,74 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
 <form action="/quiz" method="POST">
+    <input type="hidden" name="id" value="{{user.id}}">
+    <input type="hidden" name="ActiveUser" value="{{ActiveUser}}">
+    <input type="hidden" name="userid" value="{{userid}}">
 
-<input type="hidden" name="id" value="{{user.id}}">
-<input type="hidden" name="ActiveUser" value="{{user.username}}">
-<input type="hidden" name="userid" value="{{user.id}}">
-
-<div class="whitetext center" style="position:absolute; text-align:center; margin-top:-75px">
-        <h2 class="">Vehicle Quiz</h2>
-        
-    <div class="input__wrapper; space" >
-        <label for="Residence">Which best describes where you live?</label>
-        <br>
-        <select name="Residence" id="Residence">
-            <option value="Suburbs">In the suburbs</option>
-            <option value="Outskirts">Outskirts of town, some other houses nearby but not lined down the street</option>
-            <option value="City">In the city</option>
-            <option value="Far From Town">Very far from town, potentially along some gravel roads</option>
-            <option value="Farm">On a farm</option>
-        </select>
-    </div>
-    <div class="input__wrapper space">
-        <label for="People">How many people do you usually transport?</label>
-        <br>
-        <select name="People" id="People">
-            <option value="1">Just myself</option>
-            <option value="2">2</option>
-            <option value="3-5">3-5</option>
-            <option value="5-6">5-6</option>
-            <option value="7+">7+</option>
-        </select>
-    </div>
-    <div class="input__wrapper space">
-        <label for="Purpose">What will the vehicles <b>primary</b> purpose be?</label>
-        <br>
-        <select name="Purpose" id="Purpose">
-            <option value="Daily Runabout">Daily Runabout: Go to work and stop by the shops on the way home...</option>
-            <option value="Family Daily Runabout">Family Daily Runabout: Take kids to school, then go to the shops, to work, etc...</option>
-            <option value="Farm Vehicle">Farm Vehicle: Used on a farm, transports goods both in and outside the property, makes occasional trip to town</option>
-            <option value="Fun">Fun: Mainly driven for the thrill of driving</option>
-            <option value="Off-Road">Off Road: Almost exclusively driven off road such as on a property or 4WD track</option>
-            <option value="Utility">Utility/Trade Vehicle: Carries heavy work supplies such as an electrican, or plumber's tools and supplies</option>
-            <option value="Workhorse">Workhorse: Used as a quick and easy way of transporting a lot of goods</option>
-        </select>
-    </div>
-    <div class="input__wrapper space">
-        <label for="Towing">How often will you be towing something?</label>
-        <br>
-        <select name="Towing" id="Towing">
-            <option value="Never">Never</option>
-            <option value="Yearly">Only a couple of times a year</option>
-            <option value="Semi-Yearly">At least every 6 months</option>
-            <option value="Quarterly">At least every 3 months</option>
-            <option value="Monthly">Every month</option>
-            <option value="Every Week">Almost every Week</option>
-            <option value="Every Day">Almost every Day</option>
-        </select>
-    </div>
-    <div class="input__wrapper space">
-        <label for="Carry">Do you carry a lot of goods?</label>
-        <br>
-        <select name="Carry" id="Carry">
-            <option value="Strong No">No, the boot/tray is usually empty beyond a few shopping bags</option>
-            <option value="No">No, sometimes the boot/tray is used but not often or to full capacity</option>
-            <option value="Yes">Yes, the boot/tray is used often</option>
-            <option value="Strong Yes">Yes, the boot/tray is used often and usually full</option>
-        </select>
-    </div>
-    <div class="input_wrapper">
-        <button type="submit" class="space btn btn-primary hover">Finish</button>
-    </div>
+    <div class="whitetext center" style="position:absolute; text-align:center; margin-top:-75px">
+            <h2 class="">Vehicle Quiz</h2>
+            
+        <div class="input__wrapper; space" >
+            <label for="Residence">Which best describes where you live?</label>
+            <br>
+            <select name="Residence" id="Residence">
+                <option value="Suburbs">In the suburbs</option>
+                <option value="Outskirts">Outskirts of town, some other houses nearby but not lined down the street</option>
+                <option value="City">In the city</option>
+                <option value="Far From Town">Very far from town, potentially along some gravel roads</option>
+                <option value="Farm">On a farm</option>
+            </select>
+        </div>
+        <div class="input__wrapper space">
+            <label for="People">How many people do you usually transport?</label>
+            <br>
+            <select name="People" id="People">
+                <option value="1">Just myself</option>
+                <option value="2">2</option>
+                <option value="3-5">3-5</option>
+                <option value="5-6">5-6</option>
+                <option value="7+">7+</option>
+            </select>
+        </div>
+        <div class="input__wrapper space">
+            <label for="Purpose">What will the vehicles <b>primary</b> purpose be?</label>
+            <br>
+            <select name="Purpose" id="Purpose">
+                <option value="Daily Runabout">Daily Runabout: Go to work and stop by the shops on the way home...</option>
+                <option value="Family Daily Runabout">Family Daily Runabout: Take kids to school, then go to the shops, to work, etc...</option>
+                <option value="Farm Vehicle">Farm Vehicle: Used on a farm, transports goods both in and outside the property, makes occasional trip to town</option>
+                <option value="Fun">Fun: Mainly driven for the thrill of driving</option>
+                <option value="Off-Road">Off Road: Almost exclusively driven off road such as on a property or 4WD track</option>
+                <option value="Utility">Utility/Trade Vehicle: Carries heavy work supplies such as an electrican, or plumber's tools and supplies</option>
+                <option value="Workhorse">Workhorse: Used as a quick and easy way of transporting a lot of goods</option>
+            </select>
+        </div>
+        <div class="input__wrapper space">
+            <label for="Towing">How often will you be towing something?</label>
+            <br>
+            <select name="Towing" id="Towing">
+                <option value="Never">Never</option>
+                <option value="Yearly">Only a couple of times a year</option>
+                <option value="Semi-Yearly">At least every 6 months</option>
+                <option value="Quarterly">At least every 3 months</option>
+                <option value="Monthly">Every month</option>
+                <option value="Every Week">Almost every Week</option>
+                <option value="Every Day">Almost every Day</option>
+            </select>
+        </div>
+        <div class="input__wrapper space">
+            <label for="Carry">Do you carry a lot of goods?</label>
+            <br>
+            <select name="Carry" id="Carry">
+                <option value="Strong No">No, the boot/tray is usually empty beyond a few shopping bags</option>
+                <option value="No">No, sometimes the boot/tray is used but not often or to full capacity</option>
+                <option value="Yes">Yes, the boot/tray is used often</option>
+                <option value="Strong Yes">Yes, the boot/tray is used often and usually full</option>
+            </select>
+        </div>
+        <div class="input_wrapper">
+            <button type="submit" class="space btn btn-primary hover">Finish</button>
+        </div>
     </div>
 </form>
 

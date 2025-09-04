@@ -7,13 +7,13 @@
             <a 
             class="green-btn btn-primary btn" 
             style="margin-bottom: 10px"
-            href="{{url_for('signin')}}" 
+            href="{{url_for('signin', userid=userid)}}" 
             role="button">Log In</a>
             <br>
             <a 
             class="green-btn btn-primary btn" 
             style="margin-bottom: 10px"
-            href="{{url_for('signup')}}" 
+            href="{{url_for('signup', userid=0)}}" 
             role="button">Sign Up</a>
             <br>
             <a 

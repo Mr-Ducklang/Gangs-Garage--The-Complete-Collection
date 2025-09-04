@@ -1,10 +1,9 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
 
-<div class="card mb-3 text-left justify-content-left">
-    
-      <div class="container background padding">
-        <h3 class="text-left justify-content-left padding"><b>{{user.username}} Details</b></h3>
+<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:-500px;">
+      <div class="container brownbackground padding">
+        <h3><b>{{user.username}} Details</b></h3>
           <div class="container">
             <img
               src="{{user.profile_pic}}"

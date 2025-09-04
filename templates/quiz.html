@@ -1,37 +1,52 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<a 
-class="btn-primary btn" 
-href="{{url_for('quiz_questions', ActiveUser=ActiveUser, userid=userid, user=user)}}" 
-role="button">Quiz</a>
+<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:-500px;">
+    <h2><u>Ideal Vehicle Quiz Results</u></h2>    
 
-<p><b>Place of Residence:</b> {{Residence}}<br><b>Number of people usually carried:</b> {{People}}<br><b>PRIMARY purpose of the vehicle:</b> {{Purpose}}<br><b>Amount of towing done:</b> {{Towing}}<br><b>Stuff carried often? </b>{{Carry}}</p>
+        <p><b>Place of Residence:</b> {{Residence}}<br>
+        <b>Number of people usually carried:</b> {{People}}<br>
+        <b>PRIMARY purpose of the vehicle:</b> {{Purpose}}<br>
+        <b>Amount of towing done:</b> {{Towing}}<br>
+        <b>Stuff carried often? </b>{{Carry}}</p>
 
-<p>Ideal Vehicle: {{highest}}</p>
+    <p>Ideal Vehicle: {{highest}}</p>
 
-{% for vehicle in ideal %}
-    <img
-        src="{{vehicle.image}}"
-        class="idealcar"
-        alt="Picture of {{vehicle.name}}"
-        />
-    <img
-        src="{{vehicle.image2}}"
-        class="idealcar"
-        alt="Picture of {{vehicle.name}}"
-        />
-    <img
-        src="{{vehicle.image3}}"
-        class="idealcar"
-        alt="Picture of {{vehicle.name}}"
-        />
-    <p>{{vehicle.description}}</p>
-{% endfor %}
+    {% for vehicle in ideal %}
+        <img
+            src="{{vehicle.image}}"
+            class="idealcar"
+            alt="Picture of {{vehicle.name}}"
+            />
+        <img
+            src="{{vehicle.image2}}"
+            class="idealcar space"
+            alt="Picture of {{vehicle.name}}"
+            />
+        <img
+            src="{{vehicle.image3}}"
+            class="idealcar"
+            alt="Picture of {{vehicle.name}}"
+            />
+        <br>
+        <br>
+        <p>{{vehicle.description}}</p>
+    {% endfor %}
 
-<p><b>Ranking: </b><br><small>(higher points is better)</small></p>
-{% for key, value in rank.items() %}
-    {% print("{}: {} points".format(key, value)) %}<br>
-{% endfor %}
-<br>
+    <h4><b>Ranking </h4><p><small>(higher points is better)</small></p>
+    {% for key, value in rank.items() %}
+        {% print("{}: {} points".format(key, value)) %}<br>
+    {% endfor %}
+    <br>
+    <a 
+    class="btn-primary btn" 
+    href="{{url_for('quiz_questions', ActiveUser=ActiveUser, userid=userid, user=user)}}" 
+    role="button">Take Quiz Again</a>
+    <a 
+    class="btn-primary btn" 
+    href="{{url_for('menu', ActiveUser=ActiveUser, userid=userid, user=user)}}" 
+    role="button">Back to Menu</a>
+    <br>
+    <br>
+</div>
 
 {%endblock%}

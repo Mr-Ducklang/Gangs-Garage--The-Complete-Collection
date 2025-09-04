@@ -21,9 +21,9 @@ def init_routes(app):
             if userid is not None:
                 return render_template('menu.html', ActiveUser=ActiveUser, userid=userid, users=users)
             else:
-                return render_template('menu.html', ActiveUser=ActiveUser, users=users)
+                return render_template('menu.html', ActiveUser=ActiveUser, userid=0, users=users)
         else:
-            return render_template('menu.html', ActiveUser="Guest", users=users)
+            return render_template('menu.html', ActiveUser="Guest", userid=0, users=users)
     
 
     #view all vehicles in database
@@ -52,9 +52,9 @@ def init_routes(app):
                 user = User.query.get(uid)
                 return render_template('user_profile.html', user = user, ActiveUser=ActiveUser)
             else:
-                return redirect(url_for('menu', ActiveUser=ActiveUser, popup="No User ID"))
+                return redirect(url_for('menu', ActiveUser=ActiveUser, userid=0, popup="No User ID"))
         else:
-            return redirect(url_for('menu', ActiveUser="Guest", popup="Guest User"))
+            return redirect(url_for('menu', ActiveUser="Guest", userid=0, popup="Guest User"))
         
 
     #Edit User
@@ -102,7 +102,8 @@ def init_routes(app):
                 databases = Database.query.filter(Database.userid.ilike(f'%{id}%')).all()
                 return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid, user=user)
             else:
-                databases = Database.query.all()
+                userid = request.args.get('userid')
+                databases = Database.query.filter(Database.userid.ilike(f'%{id}%')).all()
                 return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid, user=user)
         else:
             databases = Database.query.all()
@@ -161,7 +162,7 @@ def init_routes(app):
     #add a database
     @app.route('/add_database', methods=['POST'])
     def add_database():
-        userid=request.args.get('userid')
+        userid=request.form.get("userid")
         ActiveUser=request.args.get('ActiveUser')
         
         databases = Database.query.all()
@@ -173,12 +174,13 @@ def init_routes(app):
             image = request.form.get("Image"),
             name = request.form.get("Name"),
             description = request.form.get("Description"),
-            databaseid = counter
+            databaseid = counter,
+            userid = userid
             )
         db.session.add(newdatabase)
         db.session.commit()
         
-        return redirect(url_for('databases', userid=userid))
+        return redirect(url_for('databases', userid=userid, ActiveUser=ActiveUser))
 
     #edit database
     @app.route('/edit_database', methods=['GET', 'POST'])
@@ -275,17 +277,20 @@ def init_routes(app):
     @app.route('/signup', methods=["GET", "POST", "PUT", "POST", "DELETE"])
     def signup():
         if request.method == "POST":
-            username = request.form["username"]
-            password = request.form["password"]
-            profile_pic = request.form["profile_pic"]
-            Day = request.form["Day"]
-            Month = request.form["Month"]
-            Year = request.form["Year"]
-            DoB = (f"{Day} {Month} {Year}")
-            dbHandler.insertUser(username, password, profile_pic, DoB)
-            return render_template('signin.html')
+            if request.form["username"] is not '':
+                username = request.form["username"]
+                password = request.form["password"]
+                profile_pic = request.form["profile_pic"]
+                Day = request.form["Day"]
+                Month = request.form["Month"]
+                Year = request.form["Year"]
+                DoB = (f"{Day} {Month} {Year}")
+                dbHandler.insertUser(username, password, profile_pic, DoB)
+                return render_template('signin.html', userid=0, ActiveUser="Guest")
+            else:
+                return render_template('signup.html', userid=0, ActiveUser="Guest")
         else:
-            return render_template('signup.html')
+            return render_template('signup.html', userid=0, ActiveUser="Guest")
 
     #sign in
     @app.route('/signin', methods=["GET", "POST"])
@@ -388,10 +393,10 @@ def init_routes(app):
                 options["Sports Car"] += 3
                 options["Sedan"] += 2
                 options["Hatchback"] += 3
-                options["Station Wagon"] += 1
+                options["Station Wagon"] += 2
                 options["Minivan"] += 1
                 options["Van"] += 2
-                options["SUV"] += -1
+                options["SUV"] += 1
                 options["Ute"] += 1
 
 
@@ -413,8 +418,8 @@ def init_routes(app):
                 options["Station Wagon"] += 3
                 options["Minivan"] += 2
                 options["Van"] += 2
-                options["SUV"] += 1
-                options["Ute"] += 1
+                options["SUV"] += 2
+                options["Ute"] += 2
 
 
             elif People == "5-6": 
@@ -500,7 +505,7 @@ def init_routes(app):
                 options["Sports Car"] += -3
                 options["Sedan"] += -1
                 options["Hatchback"] += -1
-                options["Station Wagon"] += 1
+                options["Station Wagon"] += 0
                 options["Minivan"] += 0
                 options["Van"] += 3
                 options["SUV"] += 1
