@@ -93,12 +93,20 @@ def init_routes(app):
     def databases():
         ActiveUser=request.args.get('ActiveUser')
         userid=request.args.get('userid')
-        if request.args.get('userid') is not None:
-            userid = request.args.get('userid')
-            databases = Database.query.filter(Database.userid.ilike(f'%{userid}%')).all()
+        if userid is not '':
+            id=userid
+            id = int(id)
+            user=User.query.get(id)
+            if id >0:
+                userid = request.args.get('userid')
+                databases = Database.query.filter(Database.userid.ilike(f'%{id}%')).all()
+                return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid, user=user)
+            else:
+                databases = Database.query.all()
+                return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid, user=user)
         else:
             databases = Database.query.all()
-        return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid)
+            return render_template('databases.html', databases=databases, ActiveUser=ActiveUser, userid=userid, user=User.query.get(0))
     
     #view vehicle details
     @app.route('/view_vehicle', methods=['GET'])
@@ -122,7 +130,7 @@ def init_routes(app):
             vehicles = Vehicle.query.filter((Vehicle.name.ilike(f'%{name}%')), (Vehicle.databaseid.ilike(f'%{dbid}%'))).all()
         else:
             vehicles = Vehicle.query.filter(Vehicle.databaseid.ilike(f'%{dbid}%')).all()
-        return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all(), ActiveUser=ActiveUser, userid=userid)
+        return render_template('view_database.html', database = database, vehicles = vehicles, databases = Database.query.all(), users = User.query.all(), ActiveUser=ActiveUser, userid=userid)
 
     #add vehicle
     @app.route('/add_vehicle', methods=['POST'])
@@ -155,6 +163,7 @@ def init_routes(app):
     def add_database():
         userid=request.args.get('userid')
         ActiveUser=request.args.get('ActiveUser')
+        
         databases = Database.query.all()
         counter = 1
         for i in databases:
@@ -299,8 +308,8 @@ def init_routes(app):
             
     @app.route('/quiz', methods=['GET','POST'])
     def quiz():
-        userid=request.args.get('userid')
-        ActiveUser=request.args.get('ActiveUser')
+        userid=request.form.get('userid')
+        ActiveUser=request.form.get('ActiveUser')
 
         if request.method == 'GET':
             return render_template('quiz.html', ActiveUser=ActiveUser, userid=userid)
@@ -637,8 +646,11 @@ def init_routes(app):
             vehicle = rank.keys
             ranked = rank.values
 
+            userid=request.form.get('userid')
+            ActiveUser=request.form.get('ActiveUser')
+
             ideal = IdealVehicle.query.filter(IdealVehicle.name.ilike(f'{highest}')).all()
-            return render_template('quiz.html', ideal = ideal, rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
+            return render_template('quiz.html', userid=userid, ActiveUser=ActiveUser, ideal = ideal, rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])
