@@ -135,7 +135,7 @@
             width="300"
             height="225"
           />
-          <div class="card-body">
+          <div class="card-body" style="text-align: center">
             <h5 class="card-title cardtext">{{vehicle.name}}</h5>
             <p class="cardtext">"{{vehicle.quote}}"</p>
             <p class=" cardtext"><b>Owner/Driver: </b> {{vehicle.owner}}</p>
@@ -143,18 +143,21 @@
             <!-- View Vehicle Button -->
             <a 
             class="btn btn-primary" 
+            style="text-align: center"
             href="{{url_for('view_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >View Details</a>
             <!-- Edit Vehicle Button -->
             <a 
             class="btn btn-primary" 
+            style="text-align: center"
             href="{{url_for('edit_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Edit Details</a>
             <!-- Delete Vehicle Button -->
             <a 
             class="btn btn-primary" 
+            style="text-align: center"
             href="{{url_for('delete_vehicle', id=vehicle.id, dbid=database.databaseid, ActiveUser=ActiveUser, userid=userid)}}" 
             role="button"
             >Delete</a>

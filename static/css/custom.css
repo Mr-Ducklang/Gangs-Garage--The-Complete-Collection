@@ -1,4 +1,15 @@
 /* General Stuff */
+
+input:focus {
+    background-color: rgb(130, 241, 184);
+    border: 4px solid rgb(158, 123, 210);
+    outline: none;
+    color: rgb(0, 0, 0);
+    -webkit-transition: background-color 600ms linear;
+    -ms-transition: background-color 600ms linear;
+    transition: background-color 600ms linear;
+}
+
 .center {
     position: absolute;
     width: auto;
