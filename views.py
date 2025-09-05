@@ -44,6 +44,8 @@ def init_routes(app):
         cur = con.cursor()
         ActiveUser = request.args.get('ActiveUser')
         uid = request.args.get('userid')
+        if uid is '':
+            uid=0
         uid = int(uid)
         username = ActiveUser
         user = User.query.get(username)
