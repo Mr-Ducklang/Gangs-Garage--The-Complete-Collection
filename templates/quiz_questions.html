@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<form action="/quiz" method="POST">
+<form action="/quiz_answers" method="POST">
     <input type="hidden" name="id" value="{{user.id}}">
     <input type="hidden" name="ActiveUser" value="{{ActiveUser}}">
     <input type="hidden" name="userid" value="{{userid}}">
@@ -67,7 +67,7 @@
             </select>
         </div>
         <div class="input_wrapper">
-            <button type="submit" class="space btn btn-primary hover">Finish</button>
+            <button type="submit" class="space green-btn btn btn-primary hover">Finish</button>
         </div>
     </div>
 </form>

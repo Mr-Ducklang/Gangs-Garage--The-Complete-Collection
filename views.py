@@ -311,13 +311,13 @@ def init_routes(app):
             return render_template('signin.html', ActiveUser="Guest")
             
             
-    @app.route('/quiz', methods=['GET','POST'])
-    def quiz():
+    @app.route('/quiz_answers', methods=['GET','POST'])
+    def quiz_answers():
         userid=request.form.get('userid')
         ActiveUser=request.form.get('ActiveUser')
 
         if request.method == 'GET':
-            return render_template('quiz.html', ActiveUser=ActiveUser, userid=userid)
+            return render_template('quiz_answers.html', ActiveUser=ActiveUser, userid=userid)
         
         if request.method == 'POST':
             con = sql.connect("instance/collection.db")
@@ -655,7 +655,7 @@ def init_routes(app):
             ActiveUser=request.form.get('ActiveUser')
 
             ideal = IdealVehicle.query.filter(IdealVehicle.name.ilike(f'{highest}')).all()
-            return render_template('quiz.html', userid=userid, ActiveUser=ActiveUser, ideal = ideal, rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
+            return render_template('quiz_answers.html', userid=userid, ActiveUser=ActiveUser, ideal = ideal, rank = rank, Residence=Residence, People=People, Purpose=Purpose, Towing=Towing, Carry=Carry, highest=highest, options = options, ranked = ranked, vehicle = vehicle)
 
     
     @app.route('/quiz_questions', methods=['GET', 'POST'])

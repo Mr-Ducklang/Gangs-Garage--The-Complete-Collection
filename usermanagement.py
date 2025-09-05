@@ -54,30 +54,3 @@ def retrieveUsers(username, password):
         else:
             con.close()
             return True
-
-#Added protection against Cross Site Scripting
-def insertFeedback(feedback):
-    con = sql.connect("instance/collection.db")
-    cur = con.cursor()
-    feedback = feedback.replace("&","&amp;")
-    feedback = feedback.replace("<","&lt;")
-    feedback = feedback.replace(">","&gt;")
-    feedback = feedback.replace('"',"&quot;")
-    feedback = feedback.replace("'", "&#x27;")
-    #SQL injection fix
-    cur.execute("INSERT INTO feedback (feedback) VALUES (?)",[feedback])
-    con.commit()
-    con.close()
-
-
-def listFeedback():
-    con = sql.connect("instance/collection.db")
-    cur = con.cursor()
-    data = cur.execute("SELECT * FROM feedback").fetchall()
-    con.close()
-    f = open("templates/partials/success_feedback.html", "w")
-    for row in data:
-        f.write("<p>\n")
-        f.write(f"{row[1]}\n")
-        f.write("</p>\n")
-    f.close()
