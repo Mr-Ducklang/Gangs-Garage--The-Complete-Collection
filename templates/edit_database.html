@@ -5,7 +5,7 @@
 <input type="hidden" name="id" value="{{database.id}}">
 <input type="hidden" name="ActiveUser" value="{{user.username}}">
 <input type="hidden" name="userid" value="{{user.id}}">
-
+<div class="whitetext center" style="position:absolute; text-align:center; margin-top:-125px; padding-bottom:400px">
   <!--Image-->
   <div class="mb-3">
     <label for="image" class="form-label">Image URL</label>
@@ -23,5 +23,5 @@
     <input class="form-control" id="database-description" name="Description" value="{{database.description}}"/>
   </div>
   <button type="submit" class="btn btn-primary">Save Edits</button>
-
+</div>
 {%endblock%}
