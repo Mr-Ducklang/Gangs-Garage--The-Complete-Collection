@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}{% block content %}
 
-<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:-250px; padding-bottom:500px;">
+<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:-250px; padding-bottom:300px;">
     <h2><u>Ideal Vehicle Quiz Results</u></h2>    
 
         <p><b>Place of Residence:</b> {{Residence}}<br>
@@ -12,6 +12,8 @@
     <p>Ideal Vehicle: {{highest}}</p>
 
     {% for vehicle in ideal %}
+</div>
+    <div class="container display:inline-block imagecenter" style="position:absolute; text-align:center; margin-top:225px; padding-bottom:0px;">
         <img
             src="{{vehicle.image}}"
             class="idealcar"
@@ -30,8 +32,9 @@
         <br>
         <br>
         <p>{{vehicle.description}}</p>
+    </div>
     {% endfor %}
-
+<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:300px; padding-bottom:400px;">
     <h4><b>Ranking </h4><p><small>(higher points is better)</small></p>
     {% for key, value in rank.items() %}
         {% print("{}: {} points".format(key, value)) %}<br>

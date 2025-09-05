@@ -97,6 +97,8 @@ def init_routes(app):
         userid=request.args.get('userid')
         if userid is not '':
             id=userid
+            if id is '':
+                id=0
             id = int(id)
             user=User.query.get(id)
             if id >0:
@@ -159,13 +161,13 @@ def init_routes(app):
         db.session.add(newvehicle)
         db.session.commit()
         
-        return redirect(url_for('view_database', dbid = request.form.get("databaseid"), userid=userid))
+        return redirect(url_for('view_database', dbid = request.form.get("databaseid"), ActiveUser=ActiveUser, userid=userid))
 
     #add a database
     @app.route('/add_database', methods=['POST'])
     def add_database():
         userid=request.form.get("userid")
-        ActiveUser=request.args.get('ActiveUser')
+        ActiveUser=request.form.get('ActiveUser')
         
         databases = Database.query.all()
         counter = 1
@@ -189,12 +191,16 @@ def init_routes(app):
     def edit_database():
         userid=request.args.get('userid')
         ActiveUser=request.args.get('ActiveUser')
+        if ActiveUser == '':
+            ActiveUser = 'Guest'
         user = User.query.get(userid)
         #get database
         id = request.args.get('id')
         database = Database.query.get(id)
 
         if request.method == 'GET':
+            if ActiveUser == '':
+                ActiveUser = 'Guest'
             return render_template('edit_database.html', database = database, ActiveUser=ActiveUser, userid=userid, user=user)
     
         if request.method == 'POST':
@@ -208,7 +214,11 @@ def init_routes(app):
             db.session.commit()
 
             userid=request.form.get("userid")
+            if userid is '':
+                userid=0
             ActiveUser=request.form.get("ActiveUser")
+            if ActiveUser == '':
+                ActiveUser = 'Guest'
             return redirect(url_for('databases', ActiveUser=ActiveUser, userid=userid))
 
 
@@ -260,7 +270,7 @@ def init_routes(app):
         db.session.delete(database)
         db.session.commit()
 
-        return redirect(url_for('databases', userid=userid))
+        return redirect(url_for('databases', userid=userid, ActiveUser=ActiveUser))
 
     #delete vehicle
     @app.route('/delete_vehicle', methods=['GET'])
@@ -273,7 +283,7 @@ def init_routes(app):
         db.session.delete(vehicle)
         db.session.commit()
 
-        return redirect(url_for('view_database', dbid = dbid, userid=userid))
+        return redirect(url_for('view_database', dbid = dbid, userid=userid, ActiveUser=ActiveUser))
 
     #creates new user; receives information from signup from and adds data to Users
     @app.route('/signup', methods=["GET", "POST", "PUT", "POST", "DELETE"])
@@ -308,9 +318,9 @@ def init_routes(app):
                 userid = cur.fetchone()
                 return redirect(url_for('menu', ActiveUser=username, state=isLoggedIn, userid=userid))
             else:
-                return redirect(url_for('menu', ActiveUser="Guest"))
+                return redirect(url_for('menu', ActiveUser="Guest", userid=0))
         else:
-            return render_template('signin.html', ActiveUser="Guest")
+            return render_template('signin.html', ActiveUser="Guest", userid=0)
             
             
     @app.route('/quiz_answers', methods=['GET','POST'])
