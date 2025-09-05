@@ -18,7 +18,7 @@ def init_routes(app):
         users = User.query.all()
         if ActiveUser is not None:
             userid = request.args.get('userid')
-            if userid is not None:
+            if userid is not '':
                 return render_template('menu.html', ActiveUser=ActiveUser, userid=userid, users=users)
             else:
                 return render_template('menu.html', ActiveUser=ActiveUser, userid=0, users=users)
