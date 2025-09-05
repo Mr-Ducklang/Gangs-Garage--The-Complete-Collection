@@ -29,12 +29,13 @@
             class="idealcar"
             alt="Picture of {{vehicle.name}}"
             />
+        <p class="whitetext">{{vehicle.description}}</p>
         <br>
         <br>
-        <p>{{vehicle.description}}</p>
+        
     </div>
     {% endfor %}
-<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:300px; padding-bottom:400px;">
+<div class="whitetext othercenter" style="position:absolute; text-align:center; margin-top:350px; padding-bottom:400px;">
     <h4><b>Ranking </h4><p><small>(higher points is better)</small></p>
     {% for key, value in rank.items() %}
         {% print("{}: {} points".format(key, value)) %}<br>
