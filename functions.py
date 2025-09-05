@@ -678,5 +678,3 @@ def init_routes(app):
         user = User.query.get(id)
         if request.method == 'GET':
             return render_template('quiz_questions.html', ActiveUser=ActiveUser, userid=userid, user=user)
-
-
